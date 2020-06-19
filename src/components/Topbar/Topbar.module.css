@@ -1,0 +1,24 @@
+.toolbar {
+  background-color: royalblue;
+  width: 100%;
+  position: fixed;
+}
+
+.right {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: 40px;
+}
+
+.rightItem {
+    margin-right: 0;
+}
+
+.appbar {
+  position: relative;
+  z-index: 1201;
+}
+
+.logo {
+  height: 48px;
+}
