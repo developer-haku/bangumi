@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import animeList from "../components/AnimeList/SeasonAnimeList";
+import animeList from "../components/AnimeList/SeasonAnimeList/SeasonAnimeList";
 
 export class Router extends Component {
   render() {
