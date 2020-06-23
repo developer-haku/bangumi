@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Divider, Typography } from "@material-ui/core";
 import { CalendarToday } from "@material-ui/icons";
 
 import styles from "./WeeklyAnimeList.module.css";
-import AnimeCard from "../AnimeCard/AnimeCard";
+import AnimeCard from "../../AnimeCard/AnimeCard";
 
-const animeList = (props) => {
+const WeeklyAnimeList = (props) => {
   let list = [];
 
   for (let day = 0; day < 7; day++) {
@@ -30,6 +30,8 @@ const animeList = (props) => {
     "星期五",
     "星期六",
   ];
+
+  
   const weekdayEN = [
     "Sunday",
     "Monday",
@@ -45,12 +47,28 @@ const animeList = (props) => {
       {list.map((l) => {
         return (
           <div key={list.indexOf(l)}>
-            <Typography className={props.openSidebar ? styles.animeList : styles.animeListFullScreen} variant="h5" gutterBottom>
+            <Typography
+              className={
+                props.openSidebar
+                  ? styles.animeList
+                  : styles.animeListFullScreen
+              }
+              variant="h5"
+              gutterBottom
+            >
               <CalendarToday className={styles.calendarIcon} />
               {weekdayCN[list.indexOf(l)]}
             </Typography>
             <Divider />
-            <div className={props.openSidebar ? styles.animeList : styles.animeListFullScreen}>{l}</div>
+            <div
+              className={
+                props.openSidebar
+                  ? styles.animeList
+                  : styles.animeListFullScreen
+              }
+            >
+              {l}
+            </div>
           </div>
         );
       })}
@@ -58,4 +76,4 @@ const animeList = (props) => {
   );
 };
 
-export default animeList;
+export default WeeklyAnimeList;
