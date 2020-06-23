@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   Drawer,
+  Link,
   List,
   ListItem,
   ListItemText,
@@ -12,8 +13,8 @@ import {
 } from "@material-ui/core";
 import { ExpandMore, ExpandLess } from "@material-ui/icons";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import "react-perfect-scrollbar/dist/css/styles.css";
 
+import "react-perfect-scrollbar/dist/css/styles.css";
 import styles from "./Sidebar.module.css";
 
 const Sidebar = (props) => {
@@ -53,7 +54,7 @@ const Sidebar = (props) => {
             .filter((f) => f >= i && f < i + 10)
             .map((m) => {
               return (
-                <ListItem key={m} button>
+                <ListItem key={m} button onClick={() => linkHandler("/" + m)}>
                   <ListItemText>{m}</ListItemText>
                 </ListItem>
               );
@@ -80,6 +81,10 @@ const Sidebar = (props) => {
 
   const yearList = genenerateYearList();
 
+  const linkHandler = (link) => {
+    window.open(link, "_self")
+  }
+
   return (
     <Drawer
       classes={{
@@ -91,9 +96,9 @@ const Sidebar = (props) => {
     >
       <PerfectScrollbar>
         <List className={styles.list}>
-          <ListSubheader>Weekly</ListSubheader>
+          <ListSubheader>当季新番</ListSubheader>
           <Divider />
-          <ListItem button>
+          <ListItem button onClick={() => linkHandler("/weekly")}>
             <ListItemText>每周新番</ListItemText>
           </ListItem>
           <ListSubheader>Years</ListSubheader>

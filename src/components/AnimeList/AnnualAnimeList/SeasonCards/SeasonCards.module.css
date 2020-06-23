@@ -1,0 +1,36 @@
+.season {
+  margin: 1% 1% 1% 1%;
+  width: 98%;
+  height: 74vh;
+  border-radius: 0;
+  user-select: none;
+}
+
+.button {
+  width: 25%;
+}
+
+.seasonCharacter {
+  font-family: "Hakusyu Kaisho";
+  font-size: 15vh;
+  color: black;
+  max-height: fit-content;
+  max-width: fit-content;
+  opacity: 0.75;
+}
+
+.spring {
+  color: rgba(255, 183, 197, 1);
+}
+
+.summer {
+  color: rgba(63, 201, 75, 1);
+}
+
+.autumn {
+  color: rgba(248, 152, 16, 1);
+}
+
+.winter {
+  color: rgba(183, 243, 255, 1);
+}

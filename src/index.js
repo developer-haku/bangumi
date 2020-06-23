@@ -7,7 +7,7 @@ import ReduxThunk from "redux-thunk";
 import { StylesProvider } from "@material-ui/core";
 
 import "./index.css";
-import App from "./App";
+import Layout from "./components/Layout/Layout";
 import * as serviceWorker from "./serviceWorker";
 import bangumiDataReducer from "./store/reducers/BangumiDataReducer";
 
@@ -26,7 +26,7 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <StylesProvider injectFirst>
-        <App />
+        <Layout />
       </StylesProvider>
     </BrowserRouter>
   </Provider>,

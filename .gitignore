@@ -125,3 +125,10 @@ dist
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# VSC
+.vscode/*
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/

@@ -12,7 +12,7 @@ export class Home extends Component {
   render() {
     return (
       <div>
-        <AnimeList items={this.props.selectedItems} />
+        
       </div>
     );
   }
