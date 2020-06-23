@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   Box,
@@ -10,36 +9,77 @@ import {
   Fade,
   Typography,
   CardMedia,
-  makeStyles,
   Menu,
   MenuItem,
   IconButton,
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
-import { MoreVert, FavoriteBorder, Favorite, Home, GetApp, Info, PlayCircleFilled } from "@material-ui/icons";
+import {
+  MoreVert,
+  FavoriteBorder,
+  Favorite,
+  Home,
+  GetApp,
+  Info,
+  PlayCircleFilled,
+} from "@material-ui/icons";
 
 import styles from "./AnimeCard.module.css";
 import loadingPlaceHolderImage from "../../assets/images/buka.webp";
 
-const AnimeCard = (props) => {
-  const classes = useStyles();
+const AnimeCard = React.memo((props) => {
   const [bgmApiData, setBgmApiData] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const regex = /[\u3002|\uff1f|\uff01|\uff0c|\u3001|\uff1b|\uff1a|\u201c|\u201d|\u2018|\u2019|\uff08|\uff09|\u300a|\u300b|\u3008|\u3009|\u3010|\u3011|\u300e|\u300f|\u300c|\u300d|\ufe43|\ufe44|\u3014|\u3015|\u2026|\u2014|\uff5e|\ufe4f|\uffe5]/g;
+  const siteMeta = JSON.parse(localStorage.getItem("bd_site_meta"));
 
   // 国内可能出问题
   const url =
-    "https://cors-anywhere.herokuapp.com/https://api.bgm.tv/subject/" +
+    "http://localhost:56789/https://api.bgm.tv/subject/" +
     props.bangumiId +
     "?responseGroup=small";
+  let dn1 = new Date();
+  console.log(
+    "-1",
+    dn1.getMinutes() + ":" + dn1.getSeconds() + ":" + dn1.getMilliseconds()
+  );
 
-  if (!bgmApiData) {
-    axios.get(url).then((res) => {
-      setBgmApiData(res.data);
-    });
-  }
+  useEffect(() => {
+    if (!bgmApiData) {
+      let d0 = new Date();
+      console.log(
+        "0",
+        d0.getMinutes() + ":" + d0.getSeconds() + ":" + d0.getMilliseconds()
+      );
+      axios
+        .get(url)
+        .then((res) => {
+          let d = new Date();
+          console.log(
+            bgmApiData,
+            "????",
+            d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds()
+          );
+          setBgmApiData(res.data);
+          console.log(
+            bgmApiData,
+            "!!!!",
+            d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds()
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [bgmApiData, url]);
+
+  let d1 = new Date();
+  console.log(
+    "1",
+    d1.getMinutes() + ":" + d1.getSeconds() + ":" + d1.getMilliseconds()
+  );
 
   const title = !bgmApiData
     ? props.anime.titleTranslate["zh-Hans"]
@@ -48,6 +88,7 @@ const AnimeCard = (props) => {
     : bgmApiData.name_cn === ""
     ? bgmApiData.name
     : bgmApiData.name_cn;
+  let d2 = new Date();
 
   const bangumiRating = !bgmApiData
     ? 0
@@ -57,15 +98,25 @@ const AnimeCard = (props) => {
     ? 0
     : bgmApiData.rating.score;
 
-  let menuItem = props.anime.sites.map((site) => {
-    return (
-      <MenuItem key={site.site} onClick={() => siteHandler(site.site, site.id)}>
-        {site.site === "bangumi" ? <Info className={styles.animeMenuIcon} /> : <PlayCircleFilled className={styles.animeMenuIcon} />}
-        {props.siteMeta[site.site].title}
-      </MenuItem>
-    );
-  }).sort((a, b) => a.key === "bangumi" ? 0 : 1);
+  let d3 = new Date();
 
+  let menuItem = props.anime.sites
+    .map((site) => {
+      return (
+        <MenuItem
+          key={site.site}
+          onClick={() => siteHandler(site.site, site.id)}
+        >
+          {site.site === "bangumi" ? (
+            <Info className={styles.animeMenuIcon} />
+          ) : (
+            <PlayCircleFilled className={styles.animeMenuIcon} />
+          )}
+          {siteMeta[site.site].title}
+        </MenuItem>
+      );
+    })
+    .sort((a, b) => (a.key === "bangumi" ? 0 : 1));
 
   menuItem.unshift(
     <MenuItem
@@ -81,10 +132,7 @@ const AnimeCard = (props) => {
       key="dmhy"
       onClick={() =>
         openTargetSite(
-          props.siteMeta.dmhy.urlTemplate.replace(
-            "{{id}}",
-            title.replace(regex, "")
-          )
+          siteMeta.dmhy.urlTemplate.replace("{{id}}", title.replace(regex, ""))
         )
       }
     >
@@ -98,10 +146,7 @@ const AnimeCard = (props) => {
   };
 
   const siteHandler = (site, id) => {
-    window.open(
-      props.siteMeta[site].urlTemplate.replace("{{id}}", id),
-      "_black"
-    );
+    window.open(siteMeta[site].urlTemplate.replace("{{id}}", id), "_black");
   };
 
   const menuOpenHandler = (event) => {
@@ -177,38 +222,6 @@ const AnimeCard = (props) => {
       </Menu>
     </React.Fragment>
   );
-};
+});
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  details: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  content: {
-    flex: "1 0 auto",
-  },
-  cover: {
-    width: 151,
-  },
-  controls: {
-    display: "flex",
-    alignItems: "center",
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
-  playIcon: {
-    height: 38,
-    width: 38,
-  },
-}));
-
-const mapStateToProps = (state) => {
-  return {
-    siteMeta: state.bangumiData.siteMeta,
-  };
-};
-
-export default connect(mapStateToProps)(AnimeCard);
+export default AnimeCard;
