@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button, Typography, CardMedia } from "@material-ui/core";
+import { Card, CardMedia } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
@@ -20,7 +20,7 @@ const SeasonButton = (props) => {
 
   useEffect(() => {
     if (top[props.year + props.month] !== 0 && seasonStarted) {
-      // 国内可能出问题
+      // Using a local cors-anywhere server for testing
       const url =
         "http://localhost:56789/https://api.bgm.tv/subject/" +
         top[props.year + props.month] +

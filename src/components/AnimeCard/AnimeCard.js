@@ -25,7 +25,7 @@ import {
 } from "@material-ui/icons";
 
 import styles from "./AnimeCard.module.css";
-import loadingPlaceHolderImage from "../../assets/images/buka.webp";
+import loadingPlaceHolderImage from "../../assets/images/loading.svg";
 
 const AnimeCard = React.memo((props) => {
   const [bgmApiData, setBgmApiData] = useState(null);
@@ -35,51 +35,24 @@ const AnimeCard = React.memo((props) => {
   const regex = /[\u3002|\uff1f|\uff01|\uff0c|\u3001|\uff1b|\uff1a|\u201c|\u201d|\u2018|\u2019|\uff08|\uff09|\u300a|\u300b|\u3008|\u3009|\u3010|\u3011|\u300e|\u300f|\u300c|\u300d|\ufe43|\ufe44|\u3014|\u3015|\u2026|\u2014|\uff5e|\ufe4f|\uffe5]/g;
   const siteMeta = JSON.parse(localStorage.getItem("bd_site_meta"));
 
-  // 国内可能出问题
+  // Using a local cors-anywhere server for testing
   const url =
     "http://localhost:56789/https://api.bgm.tv/subject/" +
     props.bangumiId +
     "?responseGroup=small";
-  let dn1 = new Date();
-  console.log(
-    "-1",
-    dn1.getMinutes() + ":" + dn1.getSeconds() + ":" + dn1.getMilliseconds()
-  );
 
-  useEffect(() => {
+    useEffect(() => {
     if (!bgmApiData) {
-      let d0 = new Date();
-      console.log(
-        "0",
-        d0.getMinutes() + ":" + d0.getSeconds() + ":" + d0.getMilliseconds()
-      );
       axios
         .get(url)
         .then((res) => {
-          let d = new Date();
-          console.log(
-            bgmApiData,
-            "????",
-            d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds()
-          );
           setBgmApiData(res.data);
-          console.log(
-            bgmApiData,
-            "!!!!",
-            d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds()
-          );
         })
         .catch((err) => {
           console.log(err);
         });
     }
   }, [bgmApiData, url]);
-
-  let d1 = new Date();
-  console.log(
-    "1",
-    d1.getMinutes() + ":" + d1.getSeconds() + ":" + d1.getMilliseconds()
-  );
 
   const title = !bgmApiData
     ? props.anime.titleTranslate["zh-Hans"]
@@ -88,7 +61,6 @@ const AnimeCard = React.memo((props) => {
     : bgmApiData.name_cn === ""
     ? bgmApiData.name
     : bgmApiData.name_cn;
-  let d2 = new Date();
 
   const bangumiRating = !bgmApiData
     ? 0
@@ -97,8 +69,6 @@ const AnimeCard = React.memo((props) => {
     : bgmApiData.rating.score === undefined
     ? 0
     : bgmApiData.rating.score;
-
-  let d3 = new Date();
 
   let menuItem = props.anime.sites
     .map((site) => {

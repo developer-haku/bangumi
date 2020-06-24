@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import styles from "./SeasonAnimeList.module.css";
-import AnimeCard from "../../AnimeCard/AnimeCard";
+import AnimeList from "../AnimeList";
 import * as action from "../../../store/actions";
 import { getSeasonRange } from "../../../utils/utils";
 
@@ -22,18 +22,13 @@ const SeasonAnimeList = React.memo((props) => {
       new Date(item.begin) < new Date(range[1])
   );
 
-  const list = selectedItems.map((item) => {
-    const key = item.sites.find((i) => i.site === "bangumi").id;
-    return <AnimeCard key={key} anime={item} bangumiId={key} />;
-  });
-
   return (
     <div
       className={
         props.openSidebar ? styles.animeList : styles.animeListFullScreen
       }
     >
-      {list}
+      <AnimeList list={selectedItems} />
     </div>
   );
 });

@@ -31,3 +31,10 @@ export const getSeasonRange = (year, month) => {
     endYear + "-" + ("0" + endMonth).slice(-2) + "-01T00:00:00.000Z",
   ];
 };
+
+export const getAnnualRange = (year) => {
+  return [
+    year + "-01-01T00:00:00.000Z",
+    (++year) + "-01-01T00:00:00.000Z",
+  ]
+}
