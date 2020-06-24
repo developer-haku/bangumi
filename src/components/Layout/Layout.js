@@ -7,7 +7,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import Topbar from "../Topbar/Topbar";
 import WeeklyAnimeList from "../AnimeList/WeeklyAnimeList/WeeklyAnimeList";
 import SeasonAnimeList from "../AnimeList/SeasonAnimeList/SeasonAnimeList";
-import YearAnimeList from "../AnimeList/AnnualAnimeList/AnnualAnimeList";
+import AnnualAnimeList from "../AnimeList/AnnualAnimeList/AnnualAnimeList";
 // import styles from "./Layout.module.css";
 
 class Layout extends PureComponent {
@@ -43,7 +43,7 @@ class Layout extends PureComponent {
             )}
           />
           <Route path="/:year/:month" render={() => <SeasonAnimeList openSidebar={this.state.openSidebar} />} />
-          <Route path="/:year" render={() => <YearAnimeList />} />
+          <Route path="/:year" render={() => <AnnualAnimeList openSidebar={this.state.openSidebar} />} />
         </Switch>
         {/* <YearAnimeList /> */}
         {/* <Routes /> */}
