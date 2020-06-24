@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Box, Card, Tabs, Tab, Typography } from "@material-ui/core";
+import React from "react";
+import { Tabs, Tab } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 
 import styles from "./AnnualAnimeList.module.css";
 import SeasonCards from "./SeasonCards/SeasonCards";
+import PaginationAnimeList from "./PaginationAnimeList/PaginationAnimeList";
 
 const YearAnimeList = (props) => {
   let { year } = useParams();
@@ -14,12 +15,7 @@ const YearAnimeList = (props) => {
   };
 
   return (
-    <div className={styles.seasons}>
-      <Card>
-        <Typography className={styles.year} variant="h3">
-          {year}
-        </Typography>
-      </Card>
+    <div className={props.openSidebar ? styles.seasons : styles.seasonsFullWidth}>
       <Tabs
         value={value}
         onChange={handleChange}
@@ -35,7 +31,7 @@ const YearAnimeList = (props) => {
         <SeasonCards year={year} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <PaginationAnimeList year={year} />
       </TabPanel>
     </div>
   );
