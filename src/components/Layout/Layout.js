@@ -1,13 +1,11 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { Switch, Route } from "react-router-dom";
 
 import * as action from "../../store/actions";
 import Sidebar from "../Sidebar/Sidebar";
 import Topbar from "../Topbar/Topbar";
-import WeeklyAnimeList from "../AnimeList/WeeklyAnimeList/WeeklyAnimeList";
-import SeasonAnimeList from "../AnimeList/SeasonAnimeList/SeasonAnimeList";
-import AnnualAnimeList from "../AnimeList/AnnualAnimeList/AnnualAnimeList";
+import Router from "../../router";
+
 // import styles from "./Layout.module.css";
 
 class Layout extends PureComponent {
@@ -17,7 +15,6 @@ class Layout extends PureComponent {
 
   componentDidMount() {
     this.props.initBangumiData();
-    console.log("TESTOYO")
   }
 
   siderbarHandler = () => {
@@ -31,24 +28,7 @@ class Layout extends PureComponent {
       <React.Fragment>
         <Topbar toggleSidebar={this.siderbarHandler} />
         <Sidebar openSidebar={this.state.openSidebar} />
-        <Switch>
-          <Route
-            path="/weekly"
-            exact
-            render={() => (
-              <WeeklyAnimeList
-                items={this.props.selectedItems}
-                openSidebar={this.state.openSidebar}
-              />
-            )}
-          />
-          <Route path="/:year/:month" render={() => <SeasonAnimeList openSidebar={this.state.openSidebar} />} />
-          <Route path="/:year" render={() => <AnnualAnimeList openSidebar={this.state.openSidebar} />} />
-        </Switch>
-        {/* <YearAnimeList /> */}
-        {/* <Routes /> */}
-        {/* <AnimeList items={this.props.selectedItems} openSidebar={this.state.openSidebar} /> */}
-        {/* <WeeklyAnimeList items={this.props.selectedItems} openSidebar={this.state.openSidebar} /> */}
+        <Router openSidebar={this.state.openSidebar} />
       </React.Fragment>
     );
   }
@@ -57,7 +37,6 @@ class Layout extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     years: state.bangumiData.years,
-    selectedItems: state.bangumiData.currentSelectedAnimeList,
   };
 };
 
