@@ -62,6 +62,11 @@ export const initBangumiData = () => {
     const localVersion = localStorage.getItem("bd_version");
     let lastestVersion = null;
     let items = [];
+
+    if (!localStorage.getItem("favorite")) {
+      localStorage.setItem("favorite", "[]");
+    }
+
     axios
       .get("https://data.jsdelivr.com/v1/package/npm/bangumi-data")
       .then((res) => {
