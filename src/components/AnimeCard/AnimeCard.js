@@ -30,7 +30,8 @@ import loadingPlaceHolderImage from "../../assets/images/loading.svg";
 const AnimeCard = React.memo((props) => {
   const [bgmApiData, setBgmApiData] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [isFav, setIsFav] = useState(false);
   const open = Boolean(anchorEl);
   const regex = /[\u3002|\uff1f|\uff01|\uff0c|\u3001|\uff1b|\uff1a|\u201c|\u201d|\u2018|\u2019|\uff08|\uff09|\u300a|\u300b|\u3008|\u3009|\u3010|\u3011|\u300e|\u300f|\u300c|\u300d|\ufe43|\ufe44|\u3014|\u3015|\u2026|\u2014|\uff5e|\ufe4f|\uffe5]/g;
   const siteMeta = JSON.parse(localStorage.getItem("bd_site_meta"));
@@ -41,7 +42,7 @@ const AnimeCard = React.memo((props) => {
     props.bangumiId +
     "?responseGroup=small";
 
-    useEffect(() => {
+  useEffect(() => {
     if (!bgmApiData) {
       axios
         .get(url)
@@ -53,6 +54,11 @@ const AnimeCard = React.memo((props) => {
         });
     }
   }, [bgmApiData, url]);
+
+  useEffect(() => {
+    const favList = JSON.parse(localStorage.getItem("favorite"));
+    if (favList.includes(props.bangumiId)) setIsFav(true);
+  }, [props.bangumiId]);
 
   const title = !bgmApiData
     ? props.anime.titleTranslate["zh-Hans"]
@@ -128,6 +134,17 @@ const AnimeCard = React.memo((props) => {
     setAnchorEl(null);
   };
 
+  const fav = () => {
+    let favList = JSON.parse(localStorage.getItem("favorite"));
+    if (favList.includes(props.bangumiId)) {
+      favList.splice(favList.indexOf(props.bangumiId), 1);
+    } else {
+      favList.push(props.bangumiId);
+    }
+    localStorage.setItem("favorite", JSON.stringify(favList));
+    setIsFav(!isFav);
+  };
+
   return (
     <React.Fragment>
       <Card className={styles.card}>
@@ -159,8 +176,8 @@ const AnimeCard = React.memo((props) => {
         </CardContent>
         <Divider />
         <CardActions className={styles.cardActions}>
-          <IconButton className={styles.favIcon} size="small">
-            <FavoriteBorder />
+          <IconButton className={styles.favIcon} size="small" onClick={fav}>
+            {isFav ? <Favorite /> : <FavoriteBorder />}
           </IconButton>
           <IconButton
             className={styles.moreIcon}
