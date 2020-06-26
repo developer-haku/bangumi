@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import styles from "./SeasonAnimeList.module.css";
 import AnimeList from "../AnimeList";
@@ -9,7 +9,12 @@ import { getSeasonRange } from "../../../utils/utils";
 
 const SeasonAnimeList = React.memo((props) => {
   let { year, month } = useParams();
+  let history = useHistory();
   
+  if(!parseInt(year) || !parseInt(month)) {
+    history.replace("/error");
+  }
+
   // Get season begin time and end time
   const range = getSeasonRange(year, month);
   // Get all animes

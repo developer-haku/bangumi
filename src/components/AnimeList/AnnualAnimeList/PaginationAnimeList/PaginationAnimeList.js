@@ -13,10 +13,8 @@ const PaginationAnimeList = (props) => {
   useEffect(() => {
     // Get season begin time and end time
     const range = getAnnualRange(props.year);
-    console.log(range);
     // Get all animes
     const fullItems = JSON.parse(localStorage.getItem("bd_items"));
-    console.log(fullItems);
     // Filter Selected Season
     const selectedItems = fullItems.filter(
       (item) =>
@@ -25,8 +23,6 @@ const PaginationAnimeList = (props) => {
     );
     setAnimes(selectedItems);
   }, [props.year]);
-
-  console.log(animes);
 
   const indexOfLastAnime = currentPage * animePerPage;
   const indexOfFirstAnime = indexOfLastAnime - animePerPage;

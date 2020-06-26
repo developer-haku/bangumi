@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Divider, Typography } from "@material-ui/core";
 import { CalendarToday } from "@material-ui/icons";
+import { connect } from "react-redux";
 
 import styles from "./WeeklyAnimeList.module.css";
 import AnimeCard from "../../AnimeCard/AnimeCard";
@@ -10,7 +11,7 @@ const WeeklyAnimeList = (props) => {
 
   for (let day = 0; day < 7; day++) {
     list.push(
-      props.items
+      props.selectedItems
         .filter((i) => {
           return new Date(i.begin).getDay() === day;
         })
@@ -29,17 +30,6 @@ const WeeklyAnimeList = (props) => {
     "星期四",
     "星期五",
     "星期六",
-  ];
-
-  
-  const weekdayEN = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
   ];
 
   return (
@@ -76,4 +66,10 @@ const WeeklyAnimeList = (props) => {
   );
 };
 
-export default WeeklyAnimeList;
+const mapStateToProps = (state) => {
+  return {
+    selectedItems: state.bangumiData.currentSelectedAnimeList,
+  };
+};
+
+export default connect(mapStateToProps)(WeeklyAnimeList);

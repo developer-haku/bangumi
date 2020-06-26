@@ -1,7 +1,7 @@
 /** This files store utility functions for the project. */
 
 /**
- * Get the year and month and give back the start and end time of the season
+ * Pass the year and month and give back the start and end time of the season
  * @param {number} year The year of the selected season
  * @param {number} month Any month during the selected season
  * @returns The begin and end time string array of the selected season
@@ -32,9 +32,11 @@ export const getSeasonRange = (year, month) => {
   ];
 };
 
+/**
+ * Pass the year and give back the start and end time of the year
+ * @param {number} year The year of the selected year
+ * @returns The begin and end time string array of the selected year
+ */
 export const getAnnualRange = (year) => {
-  return [
-    year + "-01-01T00:00:00.000Z",
-    (++year) + "-01-01T00:00:00.000Z",
-  ]
-}
+  return [year + "-01-01T00:00:00.000Z", ++year + "-01-01T00:00:00.000Z"];
+};
