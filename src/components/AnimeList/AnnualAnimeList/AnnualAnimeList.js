@@ -1,6 +1,6 @@
 import React from "react";
 import { Tabs, Tab } from "@material-ui/core";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import styles from "./AnnualAnimeList.module.css";
 import SeasonCards from "./SeasonCards/SeasonCards";
@@ -8,6 +8,12 @@ import PaginationAnimeList from "./PaginationAnimeList/PaginationAnimeList";
 
 const YearAnimeList = (props) => {
   let { year } = useParams();
+  let history = useHistory();
+
+  if(!parseInt(year)) {
+    history.replace("/error");
+  }
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -15,7 +21,9 @@ const YearAnimeList = (props) => {
   };
 
   return (
-    <div className={props.openSidebar ? styles.seasons : styles.seasonsFullWidth}>
+    <div
+      className={props.openSidebar ? styles.seasons : styles.seasonsFullWidth}
+    >
       <Tabs
         value={value}
         onChange={handleChange}
