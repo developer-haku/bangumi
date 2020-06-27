@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
-import styles from "./SeasonAnimeList.module.css";
+// import styles from "./SeasonAnimeList.module.css";
 import AnimeList from "../AnimeList";
 import * as action from "../../../store/actions";
 import { getSeasonRange } from "../../../utils/utils";
@@ -10,8 +10,8 @@ import { getSeasonRange } from "../../../utils/utils";
 const SeasonAnimeList = React.memo((props) => {
   let { year, month } = useParams();
   let history = useHistory();
-  
-  if(!parseInt(year) || !parseInt(month)) {
+
+  if (!parseInt(year) || !parseInt(month)) {
     history.replace("/error");
   }
 
@@ -27,15 +27,7 @@ const SeasonAnimeList = React.memo((props) => {
       new Date(item.begin) < new Date(range[1])
   );
 
-  return (
-    <div
-      className={
-        props.openSidebar ? styles.animeList : styles.animeListFullScreen
-      }
-    >
-      <AnimeList list={selectedItems} />
-    </div>
-  );
+  return <AnimeList list={selectedItems} />;
 });
 
 const mapStateToProps = (state) => {
