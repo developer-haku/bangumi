@@ -5,8 +5,8 @@ import * as action from "../../store/actions";
 import Sidebar from "../Sidebar/Sidebar";
 import Topbar from "../Topbar/Topbar";
 import Router from "../../router";
-
-// import styles from "./Layout.module.css";
+import Breadcrumb from "../Breadcrumb/Breadcrumb";
+import styles from "./Layout.module.css";
 
 class Layout extends PureComponent {
   state = {
@@ -28,7 +28,10 @@ class Layout extends PureComponent {
       <React.Fragment>
         <Topbar toggleSidebar={this.siderbarHandler} />
         <Sidebar openSidebar={this.state.openSidebar} />
-        <Router openSidebar={this.state.openSidebar} />
+        <div className={this.state.openSidebar ? styles.contentsArea : styles.contentsAreaFullWidth}>
+          <Breadcrumb />
+          <Router />
+        </div>
       </React.Fragment>
     );
   }
