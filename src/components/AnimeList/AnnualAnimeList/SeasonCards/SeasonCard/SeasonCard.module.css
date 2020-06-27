@@ -49,6 +49,10 @@
   transition: transform 300ms ease-in-out;
 }
 
+.seasonIcon {
+  width: 30%;
+}
+
 .buttonText {
   width: 100%;
   position: absolute;
@@ -58,13 +62,9 @@
   left: 0;
   right: 0;
   text-align: center;
-  background-color: white;
 }
 
 .buttonTextSeason {
   font-size: 1.5vw;
-}
-
-.buttonTextMore{
-  font-size: 1vw;
+  font-weight: bolder;
 }

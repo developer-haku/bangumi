@@ -6,7 +6,7 @@ import styles from "./AnnualAnimeList.module.css";
 import SeasonCards from "./SeasonCards/SeasonCards";
 import PaginationAnimeList from "./PaginationAnimeList/PaginationAnimeList";
 
-const YearAnimeList = (props) => {
+const AnnualAnimeList = (props) => {
   let { year } = useParams();
   let history = useHistory();
 
@@ -68,4 +68,4 @@ function TabPanel(props) {
   );
 }
 
-export default YearAnimeList;
+export default AnnualAnimeList;

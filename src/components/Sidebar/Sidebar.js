@@ -10,24 +10,28 @@ import {
   Divider,
   makeStyles,
 } from "@material-ui/core";
+import { useHistory, useLocation } from "react-router-dom";
 import { ExpandMore, ExpandLess } from "@material-ui/icons";
 import PerfectScrollbar from "react-perfect-scrollbar";
 
 import "react-perfect-scrollbar/dist/css/styles.css";
 import styles from "./Sidebar.module.css";
+import { initializedCollapseKey } from "../../utils/utils";
 
 const Sidebar = (props) => {
-  const [collapseKeys, setCollapseKeys] = useState({
-    "19601969": false,
-    "19701979": false,
-    "19801989": false,
-    "19901999": false,
-    "20002009": false,
-    "20102019": false,
-    "20202029": true,
-  });
-
+  const location = useLocation();
+  const history = useHistory();
   const classes = useStyles();
+  const [collapseKeys, setCollapseKeys] = useState({
+    "19601969": initializedCollapseKey("19601969", location),
+    "19701979": initializedCollapseKey("19701979", location),
+    "19801989": initializedCollapseKey("19801989", location),
+    "19901999": initializedCollapseKey("19901999", location),
+    "20002009": initializedCollapseKey("20002009", location),
+    "20102019": initializedCollapseKey("20102019", location),
+    "20202029": initializedCollapseKey("20202029", location),
+  });
+  const [selectedItem, setSelectedItem] = React.useState(location.pathname);
 
   const collapseHandler = (key) => {
     setCollapseKeys({
@@ -53,7 +57,12 @@ const Sidebar = (props) => {
             .filter((f) => f >= i && f < i + 10)
             .map((m) => {
               return (
-                <ListItem key={m} button onClick={() => linkHandler("/" + m)}>
+                <ListItem
+                  key={m}
+                  selected={selectedItem === "/" + m}
+                  button
+                  onClick={() => clickHandler("/" + m)}
+                >
                   <ListItemText>{m}</ListItemText>
                 </ListItem>
               );
@@ -80,9 +89,10 @@ const Sidebar = (props) => {
 
   const yearList = genenerateYearList();
 
-  const linkHandler = (link) => {
-    window.open(link, "_self")
-  }
+  const clickHandler = (link) => {
+    history.push(link);
+    setSelectedItem(link);
+  };
 
   return (
     <Drawer
@@ -95,12 +105,23 @@ const Sidebar = (props) => {
     >
       <PerfectScrollbar>
         <List className={styles.list}>
-          <ListSubheader>当季新番</ListSubheader>
+          <ListItem
+            button
+            selected={selectedItem === "/"}
+            onClick={() => clickHandler("/")}
+          >
+            <ListItemText>首页</ListItemText>
+          </ListItem>
+          <ListSubheader disableSticky>当季新番</ListSubheader>
           <Divider />
-          <ListItem button onClick={() => linkHandler("/weekly")}>
+          <ListItem
+            button
+            selected={selectedItem === "/weekly"}
+            onClick={() => clickHandler("/weekly")}
+          >
             <ListItemText>每周新番</ListItemText>
           </ListItem>
-          <ListSubheader>Years</ListSubheader>
+          <ListSubheader disableSticky>历史数据</ListSubheader>
           <Divider />
           {yearList.map((m) => {
             return m;

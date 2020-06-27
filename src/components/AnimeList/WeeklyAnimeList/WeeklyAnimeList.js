@@ -33,7 +33,7 @@ const WeeklyAnimeList = (props) => {
   ];
 
   return (
-    <div className={styles.list}>
+    <div>
       {list.map((l) => {
         return (
           <div key={list.indexOf(l)}>
@@ -50,15 +50,7 @@ const WeeklyAnimeList = (props) => {
               {weekdayCN[list.indexOf(l)]}
             </Typography>
             <Divider />
-            <div
-              className={
-                props.openSidebar
-                  ? styles.animeList
-                  : styles.animeListFullScreen
-              }
-            >
-              {l}
-            </div>
+            <div>{l}</div>
           </div>
         );
       })}

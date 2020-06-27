@@ -1,44 +1,59 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardMedia } from "@material-ui/core";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
 
 import styles from "./SeasonCard.module.css";
-import top from "../../../../../config/json/TopRated.json";
+import { getRandomAnime } from "../../../../../utils/utils";
 import NotFoundImage from "../../../../../assets/images/season_empty.jpg";
 import NotAirImage from "../../../../../assets/images/not_air.jpg";
-import SeasonCharacter from "./SeasonCharacter/SeasonCharacter";
 
-const SeasonButton = (props) => {
-  const [bgmApiData, setBgmApiData] = useState(null);
+// Icon by mynamepong @ https://www.flaticon.com/authors/mynamepong
+import SpringIcon from "../../../../../assets/images/seasons/spring.svg";
+// Icon by Freepik @ https://www.flaticon.com/authors/freepik
+import SummerIcon from "../../../../../assets/images/seasons/summer.svg";
+import AutumnIcon from "../../../../../assets/images/seasons/autumn.svg";
+import WinterIcon from "../../../../../assets/images/seasons/winter.svg";
+
+const SeasonButton = React.memo((props) => {
   const [buttonStyle, setButtonStyle] = useState(styles.bottomButton);
+  const [coverImage, setCoverImage] = useState("");
   const [imageStyle, setImageStyle] = useState(styles.coverImage);
+  const location = useLocation();
+  let history = useHistory();
+
   let cardStyle = styles.card;
   const seasonStarted =
     new Date(props.year, parseInt(props.month) - 1) < new Date();
-  let location = useLocation();
+  const seasonIcon =
+    props.season === "SPRING"
+      ? SpringIcon
+      : props.season === "SUMMER"
+      ? SummerIcon
+      : props.season === "AUTUMN"
+      ? AutumnIcon
+      : WinterIcon;
 
   useEffect(() => {
-    if (top[props.year + props.month] !== 0 && seasonStarted) {
-      // Using a local cors-anywhere server for testing
-      const url =
-        "http://localhost:56789/https://api.bgm.tv/subject/" +
-        top[props.year + props.month] +
-        "?responseGroup=small";
+    const randomId = getRandomAnime(props.year, props.month);
+    if (randomId !== 0)
+      axios
+        .get(
+          "http://localhost:56789/https://api.bgm.tv/subject/" +
+            randomId +
+            "?responseGroup=small"
+        )
+        .then((res) => {
+          setCoverImage(res.data.images.large);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    else if (seasonStarted) setCoverImage(NotFoundImage);
+    else setCoverImage(NotAirImage);
+  }, [props.month, props.year, seasonStarted]);
 
-      if (!bgmApiData) {
-        axios
-          .get(url)
-          .then((res) => {
-            setBgmApiData(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    }
-  }, [bgmApiData, props.month, props.year, seasonStarted]);
-
+  /** code for css */
   if (props.left) cardStyle += " " + styles.leftCard;
   else if (props.center) cardStyle += " " + styles.centerCard;
   else if (props.right) cardStyle += " " + styles.rightCard;
@@ -57,8 +72,10 @@ const SeasonButton = (props) => {
     setImageStyle(styles.coverImage);
   };
 
+  //********************************************************//
+
   const seasonRedirect = () => {
-    window.open(location.pathname + "/" + props.month, "_self");
+    if (seasonStarted) history.push(location.pathname + "/" + props.month);
   };
 
   return (
@@ -68,30 +85,22 @@ const SeasonButton = (props) => {
       onMouseOut={hideBottomButton}
       onClick={seasonRedirect}
     >
-      <SeasonCharacter className={styles.character} season={props.season} />
-      <CardMedia
-        className={imageStyle}
-        component="img"
-        image={
-          !bgmApiData
-            ? top[props.year + props.month] === 0
-              ? NotFoundImage
-              : seasonStarted
-              ? ""
-              : NotAirImage
-            : bgmApiData.images.large
-        }
-      />
+      <CardMedia className={imageStyle} component="img" image={coverImage} />
       <div className={buttonStyle}>
         <div className={styles.buttonText}>
+          <img
+            className={styles.seasonIcon}
+            src={seasonIcon}
+            alt={props.season}
+          />
           <p className={styles.buttonTextSeason}>
             {props.year + "年" + parseInt(props.month) + "月番"}
           </p>
-          <p className={styles.buttonTextMore}>查看更多</p>
+          {/* <p className={styles.buttonTextMore}>查看更多</p> */}
         </div>
       </div>
     </Card>
   );
-};
+});
 
 export default SeasonButton;

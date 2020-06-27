@@ -2,7 +2,7 @@ import React from "react";
 
 import AnimeCard from "../AnimeCard/AnimeCard";
 
-const AnimeList = (props) => {
+const AnimeList = React.memo((props) => {
   return (
     <React.Fragment>
       {props.list.map((item) => {
@@ -11,6 +11,6 @@ const AnimeList = (props) => {
       })}
     </React.Fragment>
   );
-};
+});
 
 export default AnimeList;
