@@ -21,6 +21,7 @@ const Breadcrumb = React.memo(() => {
     history.push(link);
   };
 
+  console.log(crumbs);
 
   let crumbLinks = [
     <Link key="home" color="inherit" onClick={() => linkHandler("/")}>
@@ -30,11 +31,12 @@ const Breadcrumb = React.memo(() => {
 
   crumbs.forEach((l) => {
     if (crumbs.indexOf(l) !== crumbs.length - 1) {
-      crumbLinks.push(
-        <Link key={l} color="inherit" onClick={() => linkHandler("/" + l)}>
-          {translateBreadcrumb(l)}
-        </Link>
-      );
+      if (l !== "bangumi")
+        crumbLinks.push(
+          <Link key={l} color="inherit" onClick={() => linkHandler("/" + l)}>
+            {translateBreadcrumb(l)}
+          </Link>
+        );
     } else {
       crumbLinks.push(
         <Typography key={l} color="textPrimary">
