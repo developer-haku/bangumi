@@ -23,6 +23,7 @@ import {
   Info,
   PlayCircleFilled,
 } from "@material-ui/icons";
+import { useHistory } from "react-router-dom";
 
 import styles from "./AnimeCard.module.css";
 import loadingPlaceHolderImage from "../../assets/images/loading.svg";
@@ -32,8 +33,8 @@ const AnimeCard = React.memo((props) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isFav, setIsFav] = useState(false);
+  const history = useHistory();
   const open = Boolean(anchorEl);
-  const regex = /[\u3002|\uff1f|\uff01|\uff0c|\u3001|\uff1b|\uff1a|\u201c|\u201d|\u2018|\u2019|\uff08|\uff09|\u300a|\u300b|\u3008|\u3009|\u3010|\u3011|\u300e|\u300f|\u300c|\u300d|\ufe43|\ufe44|\u3014|\u3015|\u2026|\u2014|\uff5e|\ufe4f|\uffe5]/g;
   const siteMeta = JSON.parse(localStorage.getItem("bd_site_meta"));
 
   // Using a local cors-anywhere server for testing
@@ -108,7 +109,7 @@ const AnimeCard = React.memo((props) => {
       key="dmhy"
       onClick={() =>
         openTargetSite(
-          siteMeta.dmhy.urlTemplate.replace("{{id}}", title.replace(regex, ""))
+          siteMeta.dmhy.urlTemplate.replace("{{id}}", title)
         )
       }
     >
@@ -118,11 +119,11 @@ const AnimeCard = React.memo((props) => {
   );
 
   const openTargetSite = (url) => {
-    window.open(url, "_black");
+    window.open(url);
   };
 
   const siteHandler = (site, id) => {
-    window.open(siteMeta[site].urlTemplate.replace("{{id}}", id), "_black");
+    window.open(siteMeta[site].urlTemplate.replace("{{id}}", id));
   };
 
   const menuOpenHandler = (event) => {
@@ -145,6 +146,10 @@ const AnimeCard = React.memo((props) => {
     setIsFav(!isFav);
   };
 
+  const goFullInfoPage = () => {
+    history.push("/bangumi/" + props.bangumiId);
+  };
+
   return (
     <React.Fragment>
       <Card className={styles.card}>
@@ -154,9 +159,10 @@ const AnimeCard = React.memo((props) => {
             !bgmApiData ? loadingPlaceHolderImage : bgmApiData.images.large
           }
           title={title}
+          onClick={goFullInfoPage}
         />
         <CardContent className={styles.cardContent}>
-          <Typography variant="subtitle2" className={styles.title}>
+          <Typography variant="subtitle2" className={styles.title} onClick={goFullInfoPage}>
             {title}
           </Typography>
         </CardContent>
