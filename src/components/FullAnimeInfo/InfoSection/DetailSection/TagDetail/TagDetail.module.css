@@ -1,0 +1,11 @@
+.header {
+    padding: 5px 7px;
+}
+
+.tag {
+    display: inline-block;
+    margin: 2px;
+    padding: 1px 5px;
+    border: 1px solid rgba(63, 81, 181, 0.5);
+    border-radius: 2px;
+}
