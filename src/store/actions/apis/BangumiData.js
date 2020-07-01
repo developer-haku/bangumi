@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import * as actionType from "../ActionTypes";
-import { getSeasonRange } from "../../../utils/utils";
+import { getSeasonRange, filterItemWithNoBangumiId } from "../../../utils/utils";
 
 export const setBangumiData = (siteMeta, items) => {
   return {
@@ -52,7 +52,7 @@ export const selectBangumiData = (version) => {
         `https://cdn.jsdelivr.net/npm/bangumi-data@${version}/dist/data.json`
       )
       .then((res) => {
-        dispatch(setBangumiData(res.data.siteMeta, res.data.items));
+        dispatch(setBangumiData(res.data.siteMeta, filterItemWithNoBangumiId(res.data.items)));
       });
   };
 };
@@ -82,9 +82,9 @@ export const initBangumiData = () => {
                 "bd_site_meta",
                 JSON.stringify(res.data.siteMeta)
               );
-              localStorage.setItem("bd_items", JSON.stringify(res.data.items));
-              dispatch(setBangumiData(res.data.siteMeta, res.data.items));
-              items = res.data.items;
+              localStorage.setItem("bd_items", JSON.stringify(filterItemWithNoBangumiId(res.data.items)));
+              dispatch(setBangumiData(res.data.siteMeta, filterItemWithNoBangumiId(res.data.items)));
+              items = filterItemWithNoBangumiId(res.data.items);
             });
         } else {
           dispatch(
