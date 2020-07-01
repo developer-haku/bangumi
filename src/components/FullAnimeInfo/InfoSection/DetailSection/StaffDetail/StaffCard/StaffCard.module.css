@@ -1,0 +1,28 @@
+.staffCard {
+  width: 32%;
+  min-width: 300px;
+  margin: 2px 0.5%;
+  display: inline-flex;
+  background-color: rgba(255, 255, 255, 0.375);
+  height: 96px;
+  float: left;
+}
+
+.profileImage {
+  height: 96px;
+  width: 96px;
+  cursor: pointer;
+}
+
+.staffInfo {
+  width: calc(100% - 96px);
+  padding-left: 3px;
+}
+
+.job {
+  margin: 0 2px;
+  border: 1px solid rgb(63, 81, 181);
+  border-radius: 2px;
+  background-color: rgba(63, 81, 181);
+  color: white;
+}

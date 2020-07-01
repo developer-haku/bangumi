@@ -112,6 +112,13 @@ const Sidebar = (props) => {
           >
             <ListItemText>首页</ListItemText>
           </ListItem>
+          <ListItem
+            button
+            selected={selectedItem === "/favorite"}
+            onClick={() => clickHandler("/favorite")}
+          >
+            <ListItemText>我的收藏</ListItemText>
+          </ListItem>
           <ListSubheader disableSticky>当季新番</ListSubheader>
           <Divider />
           <ListItem

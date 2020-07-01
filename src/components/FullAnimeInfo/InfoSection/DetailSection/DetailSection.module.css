@@ -1,0 +1,30 @@
+.detailSection {
+  display: inline-block;
+  position: fixed;
+  margin-top: 310px;
+  background-color: rgba(255, 255, 255, 0.625);
+  border-radius: 2px;
+  width: calc(100% - 25px);
+  height: atuo;
+}
+
+.left {
+  width: 20%;
+  height: auto;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.center {
+  width: 60%;
+  height: auto;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.right {
+  width: 19%;
+  height: auto;
+  display: inline-block;
+  vertical-align: top;
+}

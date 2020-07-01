@@ -1,0 +1,36 @@
+.characterCard {
+  width: 49%;
+  height: 200px;
+  margin: 0 0.5%;
+  background-color: rgba(255, 255, 255, 0.375);
+  display: inline-flex;
+  position: relative;
+}
+
+.characterImage {
+  height: 200px;
+  width: 120px;
+  display: inline-flex;
+  background-position: center top;
+}
+
+.charaInfo {
+  width: calc(100% - 120px);
+  padding-left: 5px;
+}
+
+.role {
+  border: 1px solid rgb(63, 81, 181);
+  border-radius: 2px;
+  background-color: rgba(63, 81, 181);
+  color: white;
+  margin: 0 1px;
+}
+
+.actors {
+  border: 1px solid rgb(63, 81, 181);
+  border-radius: 2px;
+  background-color: white;
+  color: rgba(63, 81, 181);
+  margin: 0 1px;
+}

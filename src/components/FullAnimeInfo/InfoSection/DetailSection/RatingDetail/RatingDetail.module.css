@@ -1,0 +1,14 @@
+.header {
+  padding: 5px 7px;
+}
+
+.ratingNum {
+  display: inline-flex;
+  width: 10%;
+}
+
+.bar {
+  display: inline-flex;
+  padding: 1px 0;
+  width: 90%;
+}
