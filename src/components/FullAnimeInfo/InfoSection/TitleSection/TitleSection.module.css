@@ -1,12 +1,14 @@
 .titleSection {
   position: fixed;
+  display: inline-block;
   height: 300px;
   width: calc(100% - 25px);
   background: linear-gradient(
     0deg,
-    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0.625) 50%,
     rgba(255, 255, 255, 0) 50%
   );
+  border-radius: 2px;
 }
 
 .coverImage {
@@ -15,7 +17,7 @@
   width: 194px;
   height: 291px;
   object-fit: cover;
-  border: 4px solid white;
+  border: 4px solid rgba(255, 255, 255, 0.625);
   border-radius: 2px;
 }
 
