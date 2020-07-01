@@ -21,8 +21,6 @@ const Breadcrumb = React.memo(() => {
     history.push(link);
   };
 
-  console.log(crumbs);
-
   let crumbLinks = [
     <Link key="home" color="inherit" onClick={() => linkHandler("/")}>
       首页
