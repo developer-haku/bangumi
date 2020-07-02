@@ -1,1 +1,1 @@
-export { initBangumiData, getSeasonList } from "./apis/BangumiData";
+export { initialization } from "./apis/BangumiData";
