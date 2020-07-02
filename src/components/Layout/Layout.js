@@ -6,6 +6,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import Topbar from "../Topbar/Topbar";
 import Router from "../../router";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
+import Loading from "../../pages/Loading/Loading";
 import styles from "./Layout.module.css";
 
 class Layout extends PureComponent {
@@ -14,7 +15,7 @@ class Layout extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.initBangumiData();
+    this.props.initialization();
   }
 
   siderbarHandler = () => {
@@ -22,30 +23,37 @@ class Layout extends PureComponent {
       return { openSidebar: !prevState.openSidebar };
     });
   };
-
   render() {
-    return (
+    return this.props.initialized ? (
       <React.Fragment>
         <Topbar toggleSidebar={this.siderbarHandler} />
         <Sidebar openSidebar={this.state.openSidebar} />
-        <div className={this.state.openSidebar ? styles.contentsArea : styles.contentsAreaFullWidth}>
+        <div
+          className={
+            this.state.openSidebar
+              ? styles.contentsArea
+              : styles.contentsAreaFullWidth
+          }
+        >
           <Breadcrumb />
           <Router />
         </div>
       </React.Fragment>
+    ) : (
+      <Loading />
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    years: state.bangumiData.years,
+    initialized: state.bangumiData.initialized,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    initBangumiData: () => dispatch(action.initBangumiData()),
+    initialization: () => dispatch(action.initialization()),
   };
 };
 
