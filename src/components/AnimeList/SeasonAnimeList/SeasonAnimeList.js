@@ -1,10 +1,8 @@
 import React from "react";
-import { connect } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
 // import styles from "./SeasonAnimeList.module.css";
 import AnimeList from "../AnimeList";
-import * as action from "../../../store/actions";
 import { getSeasonRange } from "../../../utils/utils";
 
 const SeasonAnimeList = React.memo((props) => {
@@ -30,16 +28,4 @@ const SeasonAnimeList = React.memo((props) => {
   return <AnimeList list={selectedItems} />;
 });
 
-const mapStateToProps = (state) => {
-  return {
-    selectedItems: state.bangumiData.currentSelectedAnimeList,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    selectSeason: (year, month) => dispatch(action.getSeasonList(year, month)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SeasonAnimeList);
+export default SeasonAnimeList;

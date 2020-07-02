@@ -32,6 +32,7 @@ const Sidebar = (props) => {
     "20202029": initializedCollapseKey("20202029", location),
   });
   const [selectedItem, setSelectedItem] = React.useState(location.pathname);
+  const years = JSON.parse(localStorage.getItem("years"));
 
   const collapseHandler = (key) => {
     setCollapseKeys({
@@ -41,8 +42,8 @@ const Sidebar = (props) => {
   };
 
   const genenerateYearList = () => {
-    const min = Math.min(...props.years); // get the first year.
-    const max = Math.max(...props.years); // get the last years.
+    const min = Math.min(...years); // get the first year.
+    const max = Math.max(...years); // get the last years.
     const start = parseInt(min / 10) * 10; //get the first year of the first decade
 
     let yearList = [];
@@ -53,7 +54,7 @@ const Sidebar = (props) => {
           key={"c" + i + (i + 9)}
           unmountOnExit
         >
-          {props.years
+          {years
             .filter((f) => f >= i && f < i + 10)
             .map((m) => {
               return (
@@ -87,13 +88,13 @@ const Sidebar = (props) => {
     return yearList.reverse();
   };
 
-  const yearList = genenerateYearList();
+  const yearList = years ? genenerateYearList() : [];
 
   const clickHandler = (link) => {
     history.push(link);
     setSelectedItem(link);
   };
-
+  
   return (
     <Drawer
       classes={{
