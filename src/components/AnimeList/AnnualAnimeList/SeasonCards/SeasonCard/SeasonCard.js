@@ -37,10 +37,14 @@ const SeasonButton = (props) => {
       : WinterIcon;
 
   useEffect(() => {
+    if (coverImage === "" || prevYear !== props.year) {
+      let randomId = getRandomAnime(props.year, props.month);
+      if (randomId !== 0)
+        ads.getBangumiDataBasic(randomId).then((data) => {
+          setCoverImage(data.image);
         });
-    else if (seasonStarted) setCoverImage(NotFoundImage);
-    else setCoverImage(NotAirImage);
-  }, [props.month, props.year, seasonStarted]);
+      else setCoverImage(NotFoundImage);
+    }
   }, [ads, coverImage, props.year, props.month, seasonStarted, prevYear]);
 
   /** code for css */
