@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
-import axios from "axios";
 import styled from "styled-components";
 
 import styles from "./FullAnimeInfo.module.css";
 import InfoSection from "./InfoSection/InfoSection";
+import AnimeDataService from "../../service/AnimeDataService";
 
 const Div = styled.div`
   &::before {
@@ -25,28 +25,23 @@ const FullAnimeInfo = (props) => {
   const [loading, setLoading] = useState(true);
   const [bangumiInfo, setBangumiInfo] = useState(null);
   const { bgmId } = useParams();
+  const ads = new AnimeDataService();
 
   useEffect(() => {
     if (!bangumiInfo) {
-      axios
-        .get(
-          "http://localhost:56789/https://api.bgm.tv/subject/" +
-            bgmId +
-            "?responseGroup=large"
-        )
-        .then((res) => {
-          setBangumiInfo(res.data);
-          setLoading(false);
-        });
+      ads.getBangumiDataFull(bgmId).then((data) => {
+        setBangumiInfo(data);
+        setLoading(false);
+      });
     }
-  }, [bangumiInfo, bgmId]);
+  }, [ads, bangumiInfo, bgmId]);
 
   return loading ? (
     <CircularProgress />
   ) : (
-      <Div className={styles.fullInfoPage} image={bangumiInfo.images.large}>
-        <InfoSection data={bangumiInfo} />
-      </Div>
+    <Div className={styles.fullInfoPage} image={bangumiInfo.images.large}>
+      <InfoSection data={bangumiInfo} />
+    </Div>
   );
 };
 

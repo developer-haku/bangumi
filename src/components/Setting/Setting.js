@@ -17,8 +17,11 @@ import {
 import styles from "./Setting.module.css";
 
 const Setting = (props) => {
-  const [api, setApi] = useState(
-    JSON.parse(localStorage.getItem("setting")).api
+  const [cardApi, setCardApi] = useState(
+    JSON.parse(localStorage.getItem("setting")).cardApi
+  );
+  const [pageApi, setPageApi] = useState(
+    JSON.parse(localStorage.getItem("setting")).pageApi
   );
   const [cors, setCors] = useState(
     JSON.parse(localStorage.getItem("setting")).cors.proxy
@@ -36,7 +39,8 @@ const Setting = (props) => {
       localStorage.setItem(
         "setting",
         JSON.stringify({
-          api: api,
+          cardApi: cardApi,
+          pageApi: pageApi,
           cors: {
             proxy: cors,
             url:
@@ -49,11 +53,15 @@ const Setting = (props) => {
         })
       );
       props.close();
+      window.location.reload();
     }
   };
 
-  const apiChangeHandler = (event) => {
-    setApi(event.target.value);
+  const cardApiChangeHandler = (event) => {
+    setCardApi(event.target.value);
+  };
+  const pageApiChangeHandler = (event) => {
+    setPageApi(event.target.value);
   };
 
   const corsChangeHandler = (event) => {
@@ -76,22 +84,12 @@ const Setting = (props) => {
       <DialogTitle>设置</DialogTitle>
       <DialogContent>
         <FormControl component="fieldset">
-          <FormLabel component="legend">数据源API选择</FormLabel>
-          <RadioGroup value={api} onChange={apiChangeHandler}>
+          <FormLabel component="legend">番剧列表API源</FormLabel>
+          <RadioGroup value={cardApi} onChange={cardApiChangeHandler}>
             <FormControlLabel
               control={<Radio color="primary" />}
               value="default"
               label="Bangumi-Subject(默认)"
-            />
-            <FormControlLabel
-              control={<Radio color="primary" />}
-              value="subjectAPI"
-              label="Bangumi-Subject + Bangumi API(CORS)"
-            />
-            <FormControlLabel
-              control={<Radio color="primary" />}
-              value="subjectNetabare"
-              label="Bangumi-Subject + Netaba.re"
             />
             <FormControlLabel
               control={<Radio color="primary" />}
@@ -102,6 +100,20 @@ const Setting = (props) => {
               control={<Radio color="primary" />}
               value="netabare"
               label="netaba.re"
+            />
+          </RadioGroup>
+          <Divider className={styles.divider} />
+          <FormLabel component="legend">详细页API源</FormLabel>
+          <RadioGroup value={pageApi} onChange={pageApiChangeHandler}>
+            <FormControlLabel
+              control={<Radio color="primary" />}
+              value="default"
+              label="Bangumi-Subject + Bangumi API(CORS)"
+            />
+            <FormControlLabel
+              control={<Radio color="primary" />}
+              value="netabare"
+              label="Bangumi-Subject + Netaba.re"
             />
           </RadioGroup>
           <Divider className={styles.divider} />

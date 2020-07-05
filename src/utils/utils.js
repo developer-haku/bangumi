@@ -174,3 +174,13 @@ export const lightOrDark = (color) => {
 export const toRGB = (colorArray) => {
   return "rgb(" + colorArray.join(", ") + ")";
 };
+
+/**
+ * convert the image url to another url with a different size
+ * @param {string} url bangumi image url
+ * @param {string} size single character: "l" = large | "c" = common | "m" = middle | "s" = small | "g" = grid
+ * @returns an url with a different size
+ */
+export const swapCoverPictureSize = (url, size) => {
+  return url.replace(/(?<=cover)(\/)(.)(\/)/g, `/${size}/`)
+}

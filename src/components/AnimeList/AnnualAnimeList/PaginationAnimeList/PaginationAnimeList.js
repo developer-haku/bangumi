@@ -8,7 +8,7 @@ import styles from "./PaginationAnimeList.module.css";
 const PaginationAnimeList = (props) => {
   const [animes, setAnimes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [animePerPage, setAnimePerPage] = useState(40);
+  const [animePerPage] = useState(getAnimePerPageByResolution());
 
   useEffect(() => {
     // Get season begin time and end time
@@ -43,6 +43,10 @@ const PaginationAnimeList = (props) => {
       />
     </div>
   );
+};
+
+const getAnimePerPageByResolution = () => {
+  return parseInt((window.screen.width - 250) / 160) * 3;
 };
 
 export default PaginationAnimeList;

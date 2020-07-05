@@ -9,7 +9,8 @@ export const initializeLocalSetting = () => {
     localStorage.setItem(
       "setting",
       JSON.stringify({
-        api: "default",
+        cardApi: "default",
+        pageApi: "default",
         cors: {
           proxy: "heroku",
           url: "https://cors-anywhere.herokuapp.com/",
