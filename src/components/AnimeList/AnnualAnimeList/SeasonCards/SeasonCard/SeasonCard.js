@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Card, CardMedia } from "@material-ui/core";
 import { useLocation, useHistory } from "react-router-dom";
-import axios from "axios";
 
 import styles from "./SeasonCard.module.css";
 import { getRandomAnime } from "../../../../../utils/utils";
 import NotFoundImage from "../../../../../assets/images/season_empty.jpg";
 import NotAirImage from "../../../../../assets/images/not_air.jpg";
+import AnimeDataService from "../../../../../service/AnimeDataService";
 
 // Icon by mynamepong @ https://www.flaticon.com/authors/mynamepong
 import SpringIcon from "../../../../../assets/images/seasons/spring.svg";
@@ -15,12 +15,14 @@ import SummerIcon from "../../../../../assets/images/seasons/summer.svg";
 import AutumnIcon from "../../../../../assets/images/seasons/autumn.svg";
 import WinterIcon from "../../../../../assets/images/seasons/winter.svg";
 
-const SeasonButton = React.memo((props) => {
+const SeasonButton = (props) => {
   const [buttonStyle, setButtonStyle] = useState(styles.bottomButton);
   const [coverImage, setCoverImage] = useState("");
   const [imageStyle, setImageStyle] = useState(styles.coverImage);
   const location = useLocation();
-  let history = useHistory();
+  const history = useHistory();
+  const prevYear = usePrevious(props.year);
+  const ads = new AnimeDataService();
 
   let cardStyle = styles.card;
   const seasonStarted =
@@ -35,23 +37,11 @@ const SeasonButton = React.memo((props) => {
       : WinterIcon;
 
   useEffect(() => {
-    const randomId = getRandomAnime(props.year, props.month);
-    if (randomId !== 0)
-      axios
-        .get(
-          "http://localhost:56789/https://api.bgm.tv/subject/" +
-            randomId +
-            "?responseGroup=small"
-        )
-        .then((res) => {
-          setCoverImage(res.data.images.large);
-        })
-        .catch((err) => {
-          console.log(err);
         });
     else if (seasonStarted) setCoverImage(NotFoundImage);
     else setCoverImage(NotAirImage);
   }, [props.month, props.year, seasonStarted]);
+  }, [ads, coverImage, props.year, props.month, seasonStarted, prevYear]);
 
   /** code for css */
   if (props.left) cardStyle += " " + styles.leftCard;
@@ -85,7 +75,11 @@ const SeasonButton = React.memo((props) => {
       onMouseOut={hideBottomButton}
       onClick={seasonRedirect}
     >
-      <CardMedia className={imageStyle} component="img" image={coverImage} />
+      <CardMedia
+        className={imageStyle}
+        component="img"
+        image={seasonStarted ? coverImage : NotAirImage}
+      />
       <div className={buttonStyle}>
         <div className={styles.buttonText}>
           <img
@@ -101,6 +95,15 @@ const SeasonButton = React.memo((props) => {
       </div>
     </Card>
   );
-});
+};
+
+// Custom hook
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
 
 export default SeasonButton;
