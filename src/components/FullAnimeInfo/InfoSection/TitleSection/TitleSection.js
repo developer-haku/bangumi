@@ -1,34 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, Typography } from "@material-ui/core";
 import { AccessTime, CalendarToday } from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
-import ColorThief from "colorthief";
 
 import styles from "./TitleSection.module.css";
 import {
   translateWeekday,
-  toRGB,
-  lightOrDark,
   getLocalBangumiDataById,
 } from "../../../../utils/utils";
 
 const TitleSection = (props) => {
-  const [textColor, setTextColor] = useState(styles.darkText);
-  const imgRef = React.createRef();
   const weekday = translateWeekday(props.weekday);
   const siteMeta = JSON.parse(localStorage.getItem("bd_site_meta"));
   const data = getLocalBangumiDataById("" + props.id);
   let links = null;
-
-  const imgOnLoad = () => {
-    const colorThief = new ColorThief();
-    const img = imgRef.current;
-    const results = colorThief
-      .getPalette(img, 20, 10)
-      .map((result) => lightOrDark(toRGB(result)));
-    if (results.filter((e) => e === "dark").length >= 10)
-      setTextColor(styles.lightText);
-  };
 
   if (data.length === 1) {
     links = data[0].sites
@@ -83,16 +68,9 @@ const TitleSection = (props) => {
 
   return (
     <div className={styles.titleSection}>
-      <img
-        crossOrigin={"anonymous"}
-        ref={imgRef}
-        className={styles.coverImage}
-        src={"http://localhost:56789/" + props.image}
-        alt="coverimage"
-        onLoad={imgOnLoad}
-      />
+      <img className={styles.coverImage} src={props.image} alt="coverimage" />
       <div className={styles.titleInfo}>
-        <div className={styles.basicInfo + " " + textColor}>
+        <div className={styles.basicInfo}>
           <Typography variant="h5" className="titleCN">
             {props.titleCN !== "" ? props.titleCN : props.titleJP}
           </Typography>

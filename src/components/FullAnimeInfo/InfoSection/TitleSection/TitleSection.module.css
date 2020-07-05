@@ -32,15 +32,9 @@
   white-space: nowrap;
   height: 50%;
   padding-left: 1vw;
-}
-
-.darkText {
   color: black;
 }
 
-.lightText {
-  color: white;
-}
 
 .icon {
   vertical-align: top;
