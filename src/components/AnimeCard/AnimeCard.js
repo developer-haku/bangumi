@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import {
   Box,
   Card,
@@ -27,55 +26,40 @@ import { useHistory } from "react-router-dom";
 
 import styles from "./AnimeCard.module.css";
 import loadingPlaceHolderImage from "../../assets/images/loading.svg";
+import AnimeDataService from "../../service/AnimeDataService";
 
 const AnimeCard = React.memo((props) => {
-  const [bgmApiData, setBgmApiData] = useState(null);
+  const [animeData, setAnimeData] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isFav, setIsFav] = useState(false);
   const history = useHistory();
   const open = Boolean(anchorEl);
   const siteMeta = JSON.parse(localStorage.getItem("bd_site_meta"));
-
-  // Using a local cors-anywhere server for testing
-  const url =
-    "http://localhost:56789/https://api.bgm.tv/subject/" +
-    props.bangumiId +
-    "?responseGroup=small";
+  const ads = new AnimeDataService();
 
   useEffect(() => {
-    if (!bgmApiData) {
-      axios
-        .get(url)
-        .then((res) => {
-          setBgmApiData(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    if (!animeData) {
+      ads
+        .getBangumiDataBasic(props.bangumiId)
+        .then((data) => setAnimeData(data));
     }
-  }, [bgmApiData, url]);
+  }, [ads, animeData, props.bangumiId]);
 
   useEffect(() => {
     const favList = JSON.parse(localStorage.getItem("favorite"));
     if (favList.includes(props.bangumiId)) setIsFav(true);
   }, [props.bangumiId]);
 
-  const title = !bgmApiData
+  const title = props.anime.titleTranslate["zh-Hans"]
     ? props.anime.titleTranslate["zh-Hans"]
-      ? props.anime.title
-      : props.anime.titleTranslate["zh-Hans"]
-    : bgmApiData.name_cn === ""
-    ? bgmApiData.name
-    : bgmApiData.name_cn;
+    : animeData
+    ? animeData.nameCn
+      ? animeData.nameCn
+      : animeData.name
+    : props.anime.title;
 
-  const bangumiRating = !bgmApiData
-    ? 0
-    : bgmApiData.rating === undefined
-    ? 0
-    : bgmApiData.rating.score === undefined
-    ? 0
-    : bgmApiData.rating.score;
+  const bangumiRating = !animeData ? 0 : animeData.score;
 
   let menuItem = props.anime.sites
     .map((site) => {
@@ -108,9 +92,7 @@ const AnimeCard = React.memo((props) => {
     <MenuItem
       key="dmhy"
       onClick={() =>
-        openTargetSite(
-          siteMeta.dmhy.urlTemplate.replace("{{id}}", title)
-        )
+        openTargetSite(siteMeta.dmhy.urlTemplate.replace("{{id}}", title))
       }
     >
       <GetApp className={styles.animeMenuIcon} />
@@ -156,13 +138,21 @@ const AnimeCard = React.memo((props) => {
         <CardMedia
           className={styles.coverImage}
           image={
-            !bgmApiData ? loadingPlaceHolderImage : bgmApiData.images.large
+            animeData
+              ? animeData.image
+                ? animeData.image
+                : loadingPlaceHolderImage
+              : loadingPlaceHolderImage
           }
           title={title}
           onClick={goFullInfoPage}
         />
         <CardContent className={styles.cardContent}>
-          <Typography variant="subtitle2" className={styles.title} onClick={goFullInfoPage}>
+          <Typography
+            variant="subtitle2"
+            className={styles.title}
+            onClick={goFullInfoPage}
+          >
             {title}
           </Typography>
         </CardContent>
