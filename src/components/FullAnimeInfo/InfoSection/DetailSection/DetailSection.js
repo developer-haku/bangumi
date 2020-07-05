@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
 import styles from "./DetailSection.module.css";
 import ProductionDetail from "./ProductionDetail/ProductionDetail";
@@ -10,26 +9,10 @@ import RatingDetail from "./RatingDetail/RatingDetail";
 import TagDetail from "./TagDetail/TagDetail";
 
 const DetailSection = (props) => {
-  const [bgmSbjData, setBgmSbjData] = useState(null);
-
-  useEffect(() => {
-    if (!bgmSbjData) {
-      axios
-        .get(
-          `https://cdn.jsdelivr.net/gh/czy0729/Bangumi-Subject@master/data/${parseInt(
-            props.data.id / 100
-          )}/${props.data.id}.json`
-        )
-        .then((res) => {
-          setBgmSbjData(res.data);
-        });
-    }
-  }, [bgmSbjData, props.data.id]);
-
   return (
     <div className={styles.detailSection}>
       <div className={styles.left}>
-        <ProductionDetail info={bgmSbjData ? bgmSbjData.info : ""} />
+        <ProductionDetail info={props.data.production} />
       </div>
       <div className={styles.center}>
         {props.data.eps && <EpisodeDetail episodes={props.data.eps} />}
@@ -38,7 +21,7 @@ const DetailSection = (props) => {
       </div>
       <div className={styles.right}>
         {props.data.rating && <RatingDetail rating={props.data.rating} />}
-        <TagDetail tags={bgmSbjData ? bgmSbjData.tags : []} />
+        <TagDetail tags={props.data.tags} />
       </div>
     </div>
   );
