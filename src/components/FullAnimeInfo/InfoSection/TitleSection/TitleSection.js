@@ -18,7 +18,7 @@ const TitleSection = (props) => {
   const [isFav, setIsFav] = useState(false);
   const weekday = translateWeekday(props.weekday);
   const siteMeta = JSON.parse(localStorage.getItem("bd_site_meta"));
-  const data = getLocalBangumiDataById("" + props.id);
+  const data = getLocalBangumiDataById(props.id.toString());
   let links = null;
 
   useEffect(() => {
