@@ -12,6 +12,9 @@ const CharacterDetail = (props) => {
       {props.characters.map((character) => (
         <CharacterCard key={character.id} character={character} />
       ))}
+      <Typography variant="body1" className={styles.header}>
+        角色列表 <Typography variant="caption">(点击角色图片可查看声优照片)</Typography>
+      </Typography>
     </div>
   );
 };
