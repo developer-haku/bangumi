@@ -6,12 +6,16 @@ import styles from "./StaffDetail.module.css";
 
 const StaffDetail = (props) => {
   return (
-    <div>
-      <Typography variant="body1" className={styles.header}>制作人员</Typography>
-      <Divider />
+    <div className={styles.staffDetail}>
+      <Typography variant="body1" className={styles.header}>
+        制作人员
+      </Typography>
+      <Divider className={styles.divider} />
+      <div className={styles.staffList}>
       {props.staffs.map((staff) => (
-        <StaffCard key={staff.id} staff={staff}/>
+        <StaffCard key={staff.id} staff={staff} />
       ))}
+      </div>
     </div>
   );
 };

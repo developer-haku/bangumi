@@ -1,58 +1,52 @@
 import React, { useState, useEffect } from "react";
 import {
-  Box,
   Card,
   CardContent,
-  CardActions,
-  Divider,
-  Fade,
-  Typography,
   CardMedia,
+  Typography,
+  CardActions,
   Menu,
   MenuItem,
   IconButton,
+  Fade,
 } from "@material-ui/core";
-import { Rating } from "@material-ui/lab";
 import {
-  MoreVert,
-  FavoriteBorder,
-  Favorite,
-  Home,
   GetApp,
+  Home,
   Info,
   PlayCircleFilled,
+  Favorite,
+  FavoriteBorder,
+  MoreHoriz,
 } from "@material-ui/icons";
+
+import AnimeDataService from "../../service/AnimeDataService";
+import styles from "./AnimeMiniCard.module.css";
+import NoCoverPlaceholderImage from "../../assets/images/nocover.jpg";
 import { useHistory } from "react-router-dom";
 
-import styles from "./AnimeCard.module.css";
-import NoCoverPlaceholderImage from "../../assets/images/nocover.jpg";
-import loadingPlaceHolderImage from "../../assets/images/loading.svg";
-import AnimeDataService from "../../service/AnimeDataService";
-
-const AnimeCard = React.memo((props) => {
+const AnimeMiniCard = (props) => {
   const [animeData, setAnimeData] = useState(null);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [isFav, setIsFav] = useState(false);
   const history = useHistory();
   const open = Boolean(anchorEl);
-  const siteMeta = JSON.parse(localStorage.getItem("bd_site_meta"));
   const ads = new AnimeDataService();
+  const siteMeta = JSON.parse(localStorage.getItem("bd_site_meta"));
+  const bangumiId = props.anime.sites.find((i) => i.site === "bangumi").id;
 
   useEffect(() => {
-    if (!animeData) {
-      ads
-        .getBangumiDataBasic(props.bangumiId)
-        .then((data) => {
-          setAnimeData(data);
-        });
-    }
-  }, [ads, animeData, props.bangumiId]);
+    if (!animeData)
+      ads.getBangumiDataBasic(bangumiId).then((data) => {
+        setAnimeData(data);
+      });
+  }, [ads, animeData, bangumiId]);
 
   useEffect(() => {
     const favList = JSON.parse(localStorage.getItem("favorite"));
-    if (favList.includes(props.bangumiId)) setIsFav(true);
-  }, [props.bangumiId]);
+    if (favList.includes(bangumiId)) setIsFav(true);
+  }, [bangumiId]);
 
   const title = props.anime.titleTranslate["zh-Hans"]
     ? props.anime.titleTranslate["zh-Hans"]
@@ -62,7 +56,7 @@ const AnimeCard = React.memo((props) => {
       : animeData.name
     : props.anime.title;
 
-  const bangumiRating = !animeData ? 0 : animeData.score;
+  const bangumiRating = !animeData ? 0 : animeData.score === 0 ? "X" : animeData.score;
 
   let menuItem = props.anime.sites
     .map((site) => {
@@ -122,72 +116,59 @@ const AnimeCard = React.memo((props) => {
 
   const fav = () => {
     let favList = JSON.parse(localStorage.getItem("favorite"));
-    if (favList.includes(props.bangumiId)) {
-      favList.splice(favList.indexOf(props.bangumiId), 1);
+    if (favList.includes(bangumiId)) {
+      favList.splice(favList.indexOf(bangumiId), 1);
     } else {
-      favList.push(props.bangumiId);
+      favList.push(bangumiId);
     }
     localStorage.setItem("favorite", JSON.stringify(favList));
     setIsFav(!isFav);
   };
 
   const goFullInfoPage = () => {
-    history.push("/bangumi/" + props.bangumiId);
+    history.push("/bangumi/" + bangumiId);
   };
 
   return (
     <React.Fragment>
-      <Card className={styles.card}>
+      <Card variant="outlined" className={styles.card}>
         <CardMedia
           className={styles.coverImage}
+          component="div"
           image={
             animeData
-              ? animeData.image
+              ? animeData.image !== ""
                 ? animeData.image
                 : NoCoverPlaceholderImage
-              : loadingPlaceHolderImage
+              : NoCoverPlaceholderImage
           }
-          title={title}
           onClick={goFullInfoPage}
         />
-        <CardContent className={styles.cardContent}>
+        <Typography className={styles.rating} variant="caption">{bangumiRating}</Typography>
+        <CardContent className={styles.content}>
           <Typography
-            variant="subtitle2"
             className={styles.title}
+            variant="caption"
             onClick={goFullInfoPage}
           >
             {title}
           </Typography>
+          <CardActions className={styles.actions}>
+            <IconButton className={styles.favBtn} size="small" onClick={fav}>
+              {isFav ? <Favorite className={styles.favIcon} /> : <FavoriteBorder className={styles.favIcon} />}
+            </IconButton>
+            <IconButton
+              className={styles.moreBtn}
+              size="small"
+              onClick={menuOpenHandler}
+            >
+              <MoreHoriz />
+            </IconButton>
+          </CardActions>
         </CardContent>
-        <CardContent className={styles.rating}>
-          <Rating
-            name="bangumi-rating"
-            size="small"
-            defaultValue={0}
-            value={bangumiRating / 2}
-            precision={0.1}
-            disabled={bangumiRating ? false : true}
-            readOnly
-          />
-          <Box className={styles.ratingNum}>
-            {bangumiRating ? bangumiRating : ""}
-          </Box>
-        </CardContent>
-        <Divider />
-        <CardActions className={styles.cardActions}>
-          <IconButton className={styles.favIcon} size="small" onClick={fav}>
-            {isFav ? <Favorite /> : <FavoriteBorder />}
-          </IconButton>
-          <IconButton
-            className={styles.moreIcon}
-            size="small"
-            onClick={menuOpenHandler}
-          >
-            <MoreVert />
-          </IconButton>
-        </CardActions>
       </Card>
       <Menu
+        elevation={1}
         className={styles.animeMenu}
         id="simple-menu"
         keepMounted
@@ -195,12 +176,13 @@ const AnimeCard = React.memo((props) => {
         open={open}
         onClose={menuCloseHandler}
         TransitionComponent={Fade}
+        getContentAnchorEl={null}
         anchorOrigin={{
-          vertical: "top",
+          vertical: "bottom",
           horizontal: "right",
         }}
         transformOrigin={{
-          vertical: "bottom",
+          vertical: "top",
           horizontal: "right",
         }}
       >
@@ -208,6 +190,6 @@ const AnimeCard = React.memo((props) => {
       </Menu>
     </React.Fragment>
   );
-});
+};
 
-export default AnimeCard;
+export default AnimeMiniCard;

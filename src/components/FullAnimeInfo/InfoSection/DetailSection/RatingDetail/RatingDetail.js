@@ -1,10 +1,16 @@
 import React from "react";
-import { LinearProgress, Tooltip, Typography, Divider } from "@material-ui/core";
+import {
+  LinearProgress,
+  Tooltip,
+  Typography,
+  Divider,
+} from "@material-ui/core";
 
 import styles from "./RatingDetail.module.css";
 
 const RatingDetail = (props) => {
   let ratingChart = [];
+
   for (let i = 1; i < 11; i++) {
     ratingChart.push(
       <React.Fragment key={i}>
@@ -26,10 +32,15 @@ const RatingDetail = (props) => {
   }
 
   return (
-    <div>
-      <Typography variant="body1" className={styles.header}>评分分布</Typography>
-      <Divider />
-      {ratingChart}
+    <div className={styles.ratingDetail}>
+      <Typography variant="body1" className={styles.header}>
+        评分分布{" "}
+        <Typography variant="caption">
+          (总评分人数：{props.rating.total})
+        </Typography>
+      </Typography>
+      <Divider className={styles.divider} />
+      <div className={styles.ratingChart}>{ratingChart}</div>
     </div>
   );
 };

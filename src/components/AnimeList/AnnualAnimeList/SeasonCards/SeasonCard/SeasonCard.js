@@ -15,7 +15,7 @@ import SummerIcon from "../../../../../assets/images/seasons/summer.svg";
 import AutumnIcon from "../../../../../assets/images/seasons/autumn.svg";
 import WinterIcon from "../../../../../assets/images/seasons/winter.svg";
 
-const SeasonButton = (props) => {
+const SeasonCard = (props) => {
   const [buttonStyle, setButtonStyle] = useState(styles.bottomButton);
   const [coverImage, setCoverImage] = useState("");
   const [imageStyle, setImageStyle] = useState(styles.coverImage);
@@ -45,7 +45,7 @@ const SeasonButton = (props) => {
         });
       else setCoverImage(NotFoundImage);
     }
-  }, [ads, coverImage, props.year, props.month, seasonStarted, prevYear]);
+  }, [ads, coverImage, prevYear, props.month, props.year]);
 
   /** code for css */
   if (props.left) cardStyle += " " + styles.leftCard;
@@ -94,7 +94,6 @@ const SeasonButton = (props) => {
           <p className={styles.buttonTextSeason}>
             {props.year + "年" + parseInt(props.month) + "月番"}
           </p>
-          {/* <p className={styles.buttonTextMore}>查看更多</p> */}
         </div>
       </div>
     </Card>
@@ -110,4 +109,4 @@ function usePrevious(value) {
   return ref.current;
 }
 
-export default SeasonButton;
+export default SeasonCard;

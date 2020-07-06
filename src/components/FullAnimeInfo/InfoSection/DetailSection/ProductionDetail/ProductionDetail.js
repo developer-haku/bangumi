@@ -12,7 +12,7 @@ const ProductionDetail = (props) => {
   return (
     <div className={styles.productionDetail}>
       <Typography variant="body1" className={styles.header}>制作信息</Typography>
-      <Divider />
+      <Divider className={styles.divider} />
       {infoList &&
         parsedInfo.map((m) => {
           return (

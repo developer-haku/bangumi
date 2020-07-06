@@ -1,5 +1,11 @@
 .header {
   padding: 5px 7px;
+  font-weight: bold;
+}
+
+.divider {
+  width: calc(100% - 10px);
+  margin: 0 auto;
 }
 
 .productionDetail {
@@ -8,6 +14,7 @@
 
 .parsedInfo {
   position: relative;
+  padding: 0 7px;
 }
 
 .parsedInfo::after {

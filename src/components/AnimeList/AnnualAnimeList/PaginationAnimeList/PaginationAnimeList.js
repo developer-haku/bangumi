@@ -3,14 +3,18 @@ import { Pagination } from "@material-ui/lab";
 
 import { getAnnualRange } from "../../../../utils/utils";
 import AnimeList from "../../AnimeList";
+import AnimeListSkeleton from "../../AnimeListSkeleton";
 import styles from "./PaginationAnimeList.module.css";
 
 const PaginationAnimeList = (props) => {
+  const [loading, setLoading] = useState(true);
   const [animes, setAnimes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentAnimes, setCurrentAnimes] = useState([]);
   const [animePerPage] = useState(getAnimePerPageByResolution());
 
   useEffect(() => {
+    console.log("again");
     // Get season begin time and end time
     const range = getAnnualRange(props.year);
     // Get all animes
@@ -24,15 +28,19 @@ const PaginationAnimeList = (props) => {
     setAnimes(selectedItems);
   }, [props.year]);
 
-  const indexOfLastAnime = currentPage * animePerPage;
-  const indexOfFirstAnime = indexOfLastAnime - animePerPage;
-  const currentAnimes = animes.slice(indexOfFirstAnime, indexOfLastAnime);
+  useEffect(() => {
+    const indexOfLastAnime = currentPage * animePerPage;
+    const indexOfFirstAnime = indexOfLastAnime - animePerPage;
+    const slice = animes.slice(indexOfFirstAnime, indexOfLastAnime);
+    setCurrentAnimes(slice);
+    setLoading(false);
+  }, [animePerPage, animes, currentPage]);
 
   const pageChangeHandler = (event, value) => setCurrentPage(value);
 
   return (
     <div>
-      <AnimeList list={currentAnimes} />
+      {loading ? <AnimeListSkeleton /> : <AnimeList list={currentAnimes} />}
       <Pagination
         className={styles.pagination}
         count={Math.ceil(animes.length / animePerPage)}

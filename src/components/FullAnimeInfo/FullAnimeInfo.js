@@ -17,7 +17,7 @@ const Div = styled.div`
     background-size: cover;
     background-image: url(${(props) => props.image});
     z-index: -1;
-    filter: blur(100px);
+    filter: blur(100px) brightness(0.7);
   }
 `;
 
@@ -39,7 +39,10 @@ const FullAnimeInfo = (props) => {
   return loading ? (
     <CircularProgress />
   ) : (
-    <Div className={styles.fullInfoPage} image={bangumiInfo.images.large}>
+    <Div
+      className={styles.fullInfoPage}
+      image={bangumiInfo.cover}
+    >
       <InfoSection data={bangumiInfo} />
     </Div>
   );

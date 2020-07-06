@@ -14,7 +14,7 @@ const reassembleBasicData = (data) => {
   let reassembledData = {};
   reassembledData.name = data ? data.name : null;
   reassembledData.nameCn = null;
-  reassembledData.image = data ? swapCoverPictureSize(data.image, "l") : "";
+  reassembledData.image = data ? data.image ? swapCoverPictureSize(data.image, "l") : "" : "";
   reassembledData.score = data ? (data.rating ? data.rating.score : 0) : 0;
   return reassembledData;
 };

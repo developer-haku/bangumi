@@ -1,0 +1,85 @@
+.card {
+  margin: 5px 0;
+  height: 72px;
+  position: relative;
+}
+
+.rating {
+  position: absolute;
+  display: block;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.625);
+  color: white;
+  border-radius: 0 3px 0 0;
+}
+
+.coverImage {
+  height: 72px;
+  width: 72px;
+  display: inline-block;
+}
+
+.coverImage:hover {
+  cursor: pointer;
+}
+
+.content {
+  width: calc(100% - 72px);
+  height: 100%;
+  vertical-align: top;
+  display: inline-block;
+  padding: 0;
+}
+
+.title {
+  min-width: 128px;
+  height: 50%;
+  padding: 0 5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.title:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.divider {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.actions {
+  min-width: 128px;
+  width: 100%;
+  height: 50%;
+  padding: 0;
+  display: inline-block;
+  align-content: space-around;
+}
+
+.favBtn {
+  width: 30px;
+  height: 30px;
+  color: salmon;
+  margin: 3px 0 0 5px;
+}
+
+.favIcon {
+  padding-top: 5px;
+}
+
+.moreBtn {
+  float: right;
+  margin: 3px 5px 0 0;
+}
+
+.animeMenu {
+  margin: 4px 0 0 5px;
+}

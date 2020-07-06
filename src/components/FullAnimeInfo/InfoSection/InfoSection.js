@@ -9,7 +9,7 @@ const InfoSection = (props) => {
     <div className={styles.infoSection}>
       <TitleSection
         id={props.data.id}
-        image={props.data.images.large}
+        image={props.data.cover}
         titleCN={props.data.name_cn}
         titleJP={props.data.name}
         airDate={props.data["air_date"]}

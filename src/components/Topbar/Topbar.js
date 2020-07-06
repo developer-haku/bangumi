@@ -6,10 +6,12 @@ import styles from "./Topbar.module.css";
 import logo from "../../assets/images/logo.png";
 import ResetAlert from "../Reset/Reset";
 import SettingMenu from "../Setting/Setting";
+import { useHistory } from "react-router-dom";
 
 const Topbar = (props) => {
   const [openResetAlert, setOpenResetAlert] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+  let history = useHistory();
 
   const resetAlert = () => {
     setOpenResetAlert(true);
@@ -31,6 +33,10 @@ const Topbar = (props) => {
     window.open("https://github.com/developer-haku/bangumi");
   };
 
+  const backToHome = () => {
+    history.push("/");
+  };
+
   return (
     <AppBar className={styles.appbar} position="static">
       <Toolbar className={styles.toolbar}>
@@ -42,8 +48,10 @@ const Topbar = (props) => {
         >
           <Menu />
         </IconButton>
-        <img className={styles.logo} src={logo} alt="logo" />
-        <Typography variant="h6">Bangumi</Typography>
+        <img className={styles.logo} src={logo} alt="logo" onClick={backToHome} />
+        <Typography className={styles.name} variant="h6" onClick={backToHome}>
+          Bangumi
+        </Typography>
         <div className={styles.right}>
           <IconButton
             className={styles.rightItem}
@@ -72,7 +80,9 @@ const Topbar = (props) => {
           >
             <Settings />
           </IconButton>
-          {openResetAlert && <ResetAlert open={openResetAlert} close={closeAlert} />}
+          {openResetAlert && (
+            <ResetAlert open={openResetAlert} close={closeAlert} />
+          )}
           {openMenu && <SettingMenu open={openMenu} close={closeMenu} />}
         </div>
       </Toolbar>
