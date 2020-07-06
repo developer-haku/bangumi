@@ -46,6 +46,10 @@
   color: white;
 }
 
+.favIcon {
+  color: rgb(246, 50, 89);
+  vertical-align: text-bottom;
+}
 
 .icon {
   vertical-align: top;
