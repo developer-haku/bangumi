@@ -25,6 +25,7 @@ import {
 import { useHistory } from "react-router-dom";
 
 import styles from "./AnimeCard.module.css";
+import NoCoverPlaceholderImage from "../../assets/images/nocover.jpg";
 import loadingPlaceHolderImage from "../../assets/images/loading.svg";
 import AnimeDataService from "../../service/AnimeDataService";
 
@@ -42,7 +43,9 @@ const AnimeCard = React.memo((props) => {
     if (!animeData) {
       ads
         .getBangumiDataBasic(props.bangumiId)
-        .then((data) => setAnimeData(data));
+        .then((data) => {
+          setAnimeData(data);
+        });
     }
   }, [ads, animeData, props.bangumiId]);
 
@@ -141,7 +144,7 @@ const AnimeCard = React.memo((props) => {
             animeData
               ? animeData.image
                 ? animeData.image
-                : loadingPlaceHolderImage
+                : NoCoverPlaceholderImage
               : loadingPlaceHolderImage
           }
           title={title}
