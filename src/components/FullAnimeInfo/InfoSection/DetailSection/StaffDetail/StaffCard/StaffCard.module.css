@@ -1,7 +1,7 @@
 .staffCard {
   width: 32%;
   min-width: 300px;
-  margin: 2px 0.5%;
+  margin: 0.5%;
   display: inline-flex;
   background-color: rgba(255, 255, 255, 0.375);
   height: 96px;
@@ -21,6 +21,7 @@
 
 .job {
   margin: 0 2px;
+  padding: 0 1px;
   border: 1px solid rgb(63, 81, 181);
   border-radius: 2px;
   background-color: rgba(63, 81, 181);
