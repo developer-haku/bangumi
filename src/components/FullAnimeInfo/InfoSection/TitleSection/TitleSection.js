@@ -1,6 +1,11 @@
-import React from "react";
-import { Link, Typography } from "@material-ui/core";
-import { AccessTime, CalendarToday } from "@material-ui/icons";
+import React, { useState, useEffect } from "react";
+import { Link, Typography, IconButton } from "@material-ui/core";
+import {
+  AccessTime,
+  CalendarToday,
+  Favorite,
+  FavoriteBorder,
+} from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
 
 import styles from "./TitleSection.module.css";
@@ -10,10 +15,16 @@ import {
 } from "../../../../utils/utils";
 
 const TitleSection = (props) => {
+  const [isFav, setIsFav] = useState(false);
   const weekday = translateWeekday(props.weekday);
   const siteMeta = JSON.parse(localStorage.getItem("bd_site_meta"));
   const data = getLocalBangumiDataById("" + props.id);
   let links = null;
+
+  useEffect(() => {
+    const favList = JSON.parse(localStorage.getItem("favorite"));
+    if (favList.includes(props.id.toString())) setIsFav(true);
+  }, [props.id]);
 
   if (data.length === 1) {
     links = data[0].sites
@@ -66,6 +77,17 @@ const TitleSection = (props) => {
     window.open(siteMeta[site].urlTemplate.replace("{{id}}", id));
   };
 
+  const fav = () => {
+    let favList = JSON.parse(localStorage.getItem("favorite"));
+    if (favList.includes(props.id.toString())) {
+      favList.splice(favList.indexOf(props.id.toString()), 1);
+    } else {
+      favList.push(props.id.toString());
+    }
+    localStorage.setItem("favorite", JSON.stringify(favList));
+    setIsFav(!isFav);
+  };
+
   return (
     <div className={styles.titleSection}>
       <img className={styles.coverImage} src={props.image} alt="coverimage" />
@@ -73,6 +95,9 @@ const TitleSection = (props) => {
         <div className={styles.basicInfo}>
           <Typography variant="h5" className="titleCN">
             {props.titleCN !== "" ? props.titleCN : props.titleJP}
+            <IconButton className={styles.favIcon} size="small" onClick={fav}>
+              {isFav ? <Favorite /> : <FavoriteBorder />}
+            </IconButton>
           </Typography>
           <Typography variant="subtitle2" className="titleJP">
             {props.titleJP}
