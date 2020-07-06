@@ -71,7 +71,7 @@ const CharacterCard = (props) => {
         <Typography className={styles.actors} variant="caption">
           {props.character.actors
             ? "CV: " + props.character.actors[0].name
-            : ""}
+            : "无CV"}
         </Typography>
         <Typography variant="body1">{props.character.name}</Typography>
         {props.character.info &&
