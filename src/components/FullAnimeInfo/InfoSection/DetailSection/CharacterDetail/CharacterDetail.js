@@ -6,15 +6,16 @@ import CharacterCard from "./CharacterCard/CharacterCard";
 
 const CharacterDetail = (props) => {
   return (
-    <div>
-      <Typography variant="body1" className={styles.header}>角色列表</Typography>
-      <Divider />
-      {props.characters.map((character) => (
-        <CharacterCard key={character.id} character={character} />
-      ))}
+    <div className={styles.characterDetail}>
       <Typography variant="body1" className={styles.header}>
         角色列表 <Typography variant="caption">(点击角色图片可查看声优照片)</Typography>
       </Typography>
+      <Divider className={styles.divider} />
+      <div className={styles.characterList} >
+        {props.characters.map((character) => (
+          <CharacterCard key={character.id} character={character} />
+        ))}
+      </div>
     </div>
   );
 };
