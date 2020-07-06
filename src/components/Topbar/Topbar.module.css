@@ -11,7 +11,7 @@
 }
 
 .rightItem {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 .appbar {
@@ -21,4 +21,10 @@
 
 .logo {
   height: 48px;
+  cursor: pointer;
+}
+
+.name {
+  padding: 0 10px;
+  cursor: pointer;
 }
