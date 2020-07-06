@@ -1,0 +1,16 @@
+.column {
+  width: 13%;
+  min-width: 200px;
+  display: inline-table;
+  margin: 1vh 0.3% 0 0.3%;
+}
+
+.icon {
+  display: inline-block;
+}
+
+.weekday {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 10px;
+}
