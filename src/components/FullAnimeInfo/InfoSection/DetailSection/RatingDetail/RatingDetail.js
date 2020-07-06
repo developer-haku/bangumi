@@ -1,5 +1,4 @@
 import React from "react";
-import { LinearProgress, Tooltip, Typography, Divider } from "@material-ui/core";
 import {
   LinearProgress,
   Tooltip,
@@ -34,6 +33,12 @@ const RatingDetail = (props) => {
 
   return (
     <div className={styles.ratingDetail}>
+      <Typography variant="body1" className={styles.header}>
+        评分分布{" "}
+        <Typography variant="caption">
+          (总评分人数：{props.rating.total})
+        </Typography>
+      </Typography>
       <Divider className={styles.divider} />
       <div className={styles.ratingChart}>{ratingChart}</div>
     </div>
