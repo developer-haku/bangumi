@@ -1,5 +1,19 @@
+.ratingDetail {
+  padding: 5px;
+}
+
 .header {
   padding: 5px 7px;
+  font-weight: bold;
+}
+
+.divider {
+  width: calc(100% - 10px);
+  margin: 0 auto;
+}
+
+.ratingChart {
+  padding: 5px;
 }
 
 .ratingNum {
@@ -9,6 +23,6 @@
 
 .bar {
   display: inline-flex;
-  padding: 1px 0;
+  padding: 2px 0;
   width: 90%;
 }
