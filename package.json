@@ -1,6 +1,6 @@
 {
   "name": "bangumi",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "private": true,
   "homepage": "https://bangumi.haku.dev",
   "dependencies": {
@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "react": "^16.13.1",
+    "react-device-detect": "^1.13.1",
     "react-devtools": "^4.7.0",
     "react-dom": "^16.13.1",
     "react-perfect-scrollbar": "^1.5.8",
