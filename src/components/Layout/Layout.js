@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+import { isMobile } from "react-device-detect";
 
 import * as action from "../../store/actions";
 import Sidebar from "../Sidebar/Sidebar";
@@ -16,21 +17,32 @@ class Layout extends PureComponent {
 
   componentDidMount() {
     this.props.initialization();
+    isMobile && this.setState({ openSidebar: false });
   }
 
-  siderbarHandler = () => {
-    this.setState((prevState) => {
-      return { openSidebar: !prevState.openSidebar };
-    });
+  siderbarHandler = (openSidebar = null) => {
+    if (openSidebar === null) {
+      this.setState((prevState) => {
+        return { openSidebar: !prevState.openSidebar };
+      });
+    } else {
+      this.setState({ openSidebar: openSidebar });
+    }
   };
+
   render() {
     return this.props.initialized ? (
       <React.Fragment>
-        <Topbar toggleSidebar={this.siderbarHandler} />
-        <Sidebar openSidebar={this.state.openSidebar} />
+        <Topbar toggleSidebar={() => this.siderbarHandler()} />
+        <Sidebar
+          openSidebar={this.state.openSidebar}
+          closeSidebar={() => this.siderbarHandler(false)}
+        />
         <div
           className={
-            this.state.openSidebar
+            isMobile
+              ? styles.contentsAreaFullWidth
+              : this.state.openSidebar
               ? styles.contentsArea
               : styles.contentsAreaFullWidth
           }
