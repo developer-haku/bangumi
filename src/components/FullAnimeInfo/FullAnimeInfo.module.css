@@ -1,3 +1,10 @@
 .fullInfoPage {
     margin-top: 1vh;
 }
+
+.skeleton {
+    width: 98%;
+    height: calc(100vh - 250px);
+    border-radius: 5px;
+    margin: 20px auto 0 auto
+}
