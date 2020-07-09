@@ -93,16 +93,16 @@ const TitleSection = (props) => {
       <img className={styles.coverImage} src={props.image} alt="coverimage" />
       <div className={styles.titleInfo}>
         <div className={styles.basicInfo}>
-          <Typography variant="h5" className="titleCN">
+          <Typography variant="h5" className={styles.titleCN}>
             {props.titleCN !== "" ? props.titleCN : props.titleJP}
             <IconButton className={styles.favIcon} size="small" onClick={fav}>
               {isFav ? <Favorite /> : <FavoriteBorder />}
             </IconButton>
           </Typography>
-          <Typography variant="subtitle2" className="titleJP">
+          <Typography variant="subtitle2" className={styles.titleJP}>
             {props.titleJP}
           </Typography>
-          <Typography variant="subtitle2">
+          <Typography className={styles.bangumiRating} variant="subtitle2">
             Bangumi评分：
             <Rating
               className={styles.rating}
