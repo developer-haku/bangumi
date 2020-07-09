@@ -1,5 +1,6 @@
 import React from "react";
 
+import styles from "./WeeklyAnimeList.module.css";
 import AnimeColumnList from "../../AnimeColumnList/AnimeColumnList";
 import { getSeasonRange } from "../../../utils/utils";
 
@@ -28,7 +29,7 @@ const WeeklyAnimeList = (props) => {
   }
 
   return (
-    <div>
+    <div className={styles.weeklyAnimeList}>
       {list.map((l) => {
         return (
           <AnimeColumnList

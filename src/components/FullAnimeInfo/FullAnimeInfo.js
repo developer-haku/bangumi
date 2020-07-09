@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { CircularProgress } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
 import styled from "styled-components";
 
 import styles from "./FullAnimeInfo.module.css";
@@ -21,7 +21,7 @@ const Div = styled.div`
   }
 `;
 
-const FullAnimeInfo = (props) => {
+const FullAnimeInfo = () => {
   const [loading, setLoading] = useState(true);
   const [bangumiInfo, setBangumiInfo] = useState(null);
   const { bgmId } = useParams();
@@ -37,12 +37,9 @@ const FullAnimeInfo = (props) => {
   }, [ads, bangumiInfo, bgmId]);
 
   return loading ? (
-    <CircularProgress />
+    <Skeleton className={styles.skeleton} animation="wave" variant="rect" />
   ) : (
-    <Div
-      className={styles.fullInfoPage}
-      image={bangumiInfo.cover}
-    >
+    <Div className={styles.fullInfoPage} image={bangumiInfo.cover}>
       <InfoSection data={bangumiInfo} />
     </Div>
   );

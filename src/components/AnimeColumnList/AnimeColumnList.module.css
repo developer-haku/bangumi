@@ -7,10 +7,17 @@
 
 .icon {
   display: inline-block;
+  opacity: 0.9;
 }
 
 .weekday {
   display: inline-block;
   vertical-align: top;
   margin-left: 10px;
+}
+
+@media only screen and (max-width: 480px) {
+  .column{
+    width: 95%;
+  }
 }

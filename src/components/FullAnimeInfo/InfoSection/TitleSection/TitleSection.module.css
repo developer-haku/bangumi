@@ -13,7 +13,7 @@
 
 .coverImage {
   display: inline-block;
-  margin-left: 5vw;
+  margin-left: 4vw;
   width: 194px;
   height: 291px;
   object-fit: cover;
@@ -81,4 +81,160 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 6;
   overflow: hidden;
+}
+
+@media screen and (max-width: 800px) {
+  .titleSection {
+    height: 154px;
+    width: calc(100% - 20px);
+    background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.625) 80%,
+      rgba(255, 255, 255, 0) 80%
+    );
+    padding-top: 4px;
+    padding-bottom: 144px;
+  }
+
+  .titleCN,
+  .titleJP {
+    color: white;
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .favIcon {
+    position: absolute;
+    right: 0;
+  }
+
+  .coverImage {
+    margin-left: 2vw;
+    width: 100px;
+    height: 150px;
+    border: 0;
+  }
+
+  .titleInfo {
+    vertical-align: top;
+    display: inline-block;
+    width: calc(100% - 100px - 2vw);
+  }
+
+  .basicInfo {
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    height: 100%;
+    padding-left: 10px;
+    color: black;
+  }
+
+  .links {
+    position: absolute;
+    display: block;
+    bottom: 50%;
+    white-space: pre-wrap;
+  }
+
+  .link {
+    display: inline-block;
+  }
+
+  .summaryInfo {
+    height: 50%;
+    position: absolute;
+    margin-left: calc(-100px - 1vw);
+    margin-right: 1vw;
+  }
+
+  .summary {
+    padding-top: 0.5vw;
+    border-top: 1px solid #aaa;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .titleSection {
+    width: 100%;
+    background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.625) 86%,
+      rgba(255, 255, 255, 0) 86%
+    );
+  }
+
+  .titleCN {
+    font-size: 1rem;
+  }
+
+  .titleJP,
+  .links,
+  .time,
+  .bangumiRating,
+  .summary {
+    font-size: 0.7rem;
+  }
+
+  .rating {
+    font-size: 0.9rem;
+    vertical-align: text-top;
+  }
+
+  .summary {
+    -webkit-line-clamp: 8;
+  }
+}
+@media screen and (max-width: 400px) {
+  .titleSection {
+    width: 100%;
+    background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.625) 86%,
+      rgba(255, 255, 255, 0) 86%
+    );
+  }
+
+  .titleCN {
+    font-size: 1rem;
+  }
+
+  .titleJP,
+  .links,
+  .time,
+  .bangumiRating {
+    font-size: 0.7rem;
+  }
+
+  .rating {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .titleSection {
+    width: 100%;
+    background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.625) 88%,
+      rgba(255, 255, 255, 0) 88%
+    );
+  }
+
+  .titleCN {
+    font-size: 0.8rem;
+  }
+
+  .titleJP,
+  .links,
+  .time,
+  .bangumiRating {
+    font-size: 0.625rem;
+  }
+
+  .rating {
+    font-size: 0.8rem;
+  }
 }

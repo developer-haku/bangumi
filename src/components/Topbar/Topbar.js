@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
 import { Menu, Settings, GitHub, Cached } from "@material-ui/icons";
+import { isMobile } from "react-device-detect";
 
 import styles from "./Topbar.module.css";
 import logo from "../../assets/images/logo.png";
@@ -48,10 +49,23 @@ const Topbar = (props) => {
         >
           <Menu />
         </IconButton>
-        <img className={styles.logo} src={logo} alt="logo" onClick={backToHome} />
-        <Typography className={styles.name} variant="h6" onClick={backToHome}>
-          Bangumi
-        </Typography>
+        {!isMobile && (
+          <React.Fragment>
+            <img
+              className={styles.logo}
+              src={logo}
+              alt="logo"
+              onClick={backToHome}
+            />
+            <Typography
+              className={styles.name}
+              variant="h6"
+              onClick={backToHome}
+            >
+              Bangumi
+            </Typography>
+          </React.Fragment>
+        )}
         <div className={styles.right}>
           <IconButton
             className={styles.rightItem}

@@ -2,7 +2,7 @@
   height: 340px;
   width: 150px;
   display: inline-block;
-  margin: 5px 5px;
+  margin: 5px;
 }
 
 .title {
@@ -34,34 +34,208 @@
 }
 
 .rating {
-    display: flex;
-    margin: -8px 0 0 -12px;
-    padding-bottom: 5px;
+  display: flex;
+  margin: -8px 0 0 -12px;
+  padding-bottom: 5px;
 }
 
 .ratingNum {
-    margin: -2px 0 0 5px;
+  margin: -2px 0 0 5px;
 }
 
 .cardActions {
-    padding-top: 3px;
+  padding-top: 3px;
+  width: 100%;
+  display: inline-block;
+  align-content: space-around;
 }
 
-.favIcon {
-    color: salmon;
+.favBtn {
+  color: salmon;
 }
 
-.moreIcon {
-    margin-left: 75px !important;
+.moreBtn {
+  margin-right: 10px;
+  float: right;
 }
 
 .animeMenu {
-    width: 200px;
-    margin: 5px 0 0 5px;
+  width: 200px;
+  margin: 5px 0 0 5px;
 }
 
 .animeMenuIcon {
   padding-right: 10px;
+}
+
+@media only screen and (max-width: 480px) and (min-width: 415px) {
+  .card {
+    height: 320px;
+    width: 144px;
+    margin: 4px;
+  }
+
+  .coverImage {
+    height: 216px;
+    width: 144px;
+  }
+
+  .title {
+    margin: -15px 0 0 -10px;
+    width: 132px;
+  }
+
+  .rating {
+    margin: -8px 0 0 -12px;
+    padding-top: 6px;
+  }
+
+  .animeMenu {
+    margin: 5px 0 0 0;
+  }
+
+  .menuItem {
+    padding: 2px 10px;
+    min-height: 36px;
+  }
+}
+
+@media only screen and (max-width: 414px) and (min-width: 376px) {
+  .card {
+    height: 272px;
+    width: 120px;
+    margin: 4px;
+  }
+
+  .coverImage {
+    height: 180px;
+    width: 120px;
+  }
+
+  .title {
+    width: 110px;
+    margin: -15px 0 0 -10px;
+  }
+
+  .rating {
+    margin: -8px 0 0 -16px;
+    padding-top: 6px;
+    padding-bottom: 2px;
+    transform: scale(0.9);
+  }
+
+  .favBtn {
+    color: salmon;
+    transform: scale(0.9);
+    margin: -6px 0 0 -6px;
+  }
+
+  .moreBtn {
+    transform: scale(0.9);
+    margin-top: -5px;
+  }
+
+  .animeMenu {
+    margin: 5px 0 0 0;
+  }
+
+  .menuItem {
+    padding: 2px 5px;
+    min-height: 32px;
+    transform: scale(0.9);
+  }
+}
+
+@media only screen and (max-width: 375px) and (min-width: 321px) {
+  .card {
+    height: 256px;
+    width: 105px;
+    margin: 4px;
+  }
+
+  .coverImage {
+    height: 165px;
+    width: 105px;
+  }
+
+  .title {
+    width: 100px;
+    margin: -18px 0 0 -12px;
+  }
+
+  .rating {
+    margin: -8px 0 0 -22px;
+    padding-top: 4px;
+    padding-bottom: 2px;
+    transform: scale(0.8);
+  }
+
+  .favBtn {
+    color: salmon;
+    transform: scale(0.8);
+    margin: -6px 0 0 -6px;
+  }
+
+  .moreBtn {
+    transform: scale(0.8);
+    margin-top: -5px;
+  }
+  
+  .animeMenu {
+    margin: 5px 0 0 4px;
+  }
+
+  .menuItem {
+    padding: 1px 2px;
+    min-height: 24px;
+    transform: scale(0.8);
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .card {
+    height: 303px;
+    width: 140px;
+    margin: 4px;
+  }
+
+  .coverImage {
+    height: 210px;
+    width: 140px;
+  }
+
+  .title {
+    width: 135px;
+    margin: -18px 0 0 -10px;
+  }
+
+  .rating {
+    margin: -8px 0 0 -18px;
+    padding-top: 4px;
+    padding-bottom: 2px;
+    transform: scale(0.9);
+  }
+
+  .favBtn {
+    color: salmon;
+    transform: scale(0.9);
+    margin: -6px 0 0 -6px;
+  }
+
+  .moreBtn {
+    transform: scale(0.9);
+    margin-top: -5px;
+  }
+
+  .animeMenu {
+    margin: 5px 0 0 2px;
+  }
+
+  .menuItem {
+    padding: 1px 5px;
+    min-height: 30px;
+    transform: scale(0.9);
+  }
 }
 
 /****** SKELETON ONLY CSS ******/

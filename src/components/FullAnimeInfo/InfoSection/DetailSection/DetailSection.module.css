@@ -28,3 +28,27 @@
   display: inline-block;
   vertical-align: top;
 }
+
+@media screen and (max-width: 800px) {
+  .detailSection {
+    width: calc(100% - 20px);
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .center {
+    width: 100%;
+  }
+
+  .right {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .detailSection {
+    width: 100%;
+  }
+}

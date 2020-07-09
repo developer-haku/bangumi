@@ -23,6 +23,7 @@ import {
   PlayCircleFilled,
 } from "@material-ui/icons";
 import { useHistory } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 
 import styles from "./AnimeCard.module.css";
 import NoCoverPlaceholderImage from "../../assets/images/nocover.jpg";
@@ -41,11 +42,9 @@ const AnimeCard = React.memo((props) => {
 
   useEffect(() => {
     if (!animeData) {
-      ads
-        .getBangumiDataBasic(props.bangumiId)
-        .then((data) => {
-          setAnimeData(data);
-        });
+      ads.getBangumiDataBasic(props.bangumiId).then((data) => {
+        setAnimeData(data);
+      });
     }
   }, [ads, animeData, props.bangumiId]);
 
@@ -69,6 +68,7 @@ const AnimeCard = React.memo((props) => {
       return (
         <MenuItem
           key={site.site}
+          className={styles.menuItem}
           onClick={() => siteHandler(site.site, site.id)}
         >
           {site.site === "bangumi" ? (
@@ -85,6 +85,7 @@ const AnimeCard = React.memo((props) => {
   menuItem.unshift(
     <MenuItem
       key="official"
+      className={styles.menuItem}
       onClick={() => openTargetSite(props.anime.officialSite)}
     >
       <Home className={styles.animeMenuIcon} />
@@ -94,6 +95,7 @@ const AnimeCard = React.memo((props) => {
   menuItem.push(
     <MenuItem
       key="dmhy"
+      className={styles.menuItem}
       onClick={() =>
         openTargetSite(siteMeta.dmhy.urlTemplate.replace("{{id}}", title))
       }
@@ -152,7 +154,7 @@ const AnimeCard = React.memo((props) => {
         />
         <CardContent className={styles.cardContent}>
           <Typography
-            variant="subtitle2"
+            variant={isMobile ? "caption" : "subtitle2"}
             className={styles.title}
             onClick={goFullInfoPage}
           >
@@ -175,11 +177,11 @@ const AnimeCard = React.memo((props) => {
         </CardContent>
         <Divider />
         <CardActions className={styles.cardActions}>
-          <IconButton className={styles.favIcon} size="small" onClick={fav}>
-            {isFav ? <Favorite /> : <FavoriteBorder />}
+          <IconButton className={styles.favBtn} size="small" onClick={fav}>
+            {isFav ? <Favorite className={styles.favIcon} /> : <FavoriteBorder className={styles.favIcon} />}
           </IconButton>
           <IconButton
-            className={styles.moreIcon}
+            className={styles.moreBtn}
             size="small"
             onClick={menuOpenHandler}
           >
