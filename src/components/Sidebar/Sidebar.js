@@ -8,11 +8,11 @@ import {
   Collapse,
   ListSubheader,
   Divider,
-  makeStyles,
 } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router-dom";
 import { ExpandMore, ExpandLess } from "@material-ui/icons";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import { isMobile } from "react-device-detect";
 
 import "react-perfect-scrollbar/dist/css/styles.css";
 import styles from "./Sidebar.module.css";
@@ -21,7 +21,6 @@ import { initializedCollapseKey } from "../../utils/utils";
 const Sidebar = (props) => {
   const location = useLocation();
   const history = useHistory();
-  const classes = useStyles();
   const [collapseKeys, setCollapseKeys] = useState({
     "19601969": initializedCollapseKey("19601969", location),
     "19701979": initializedCollapseKey("19701979", location),
@@ -93,19 +92,21 @@ const Sidebar = (props) => {
   const clickHandler = (link) => {
     history.push(link);
     setSelectedItem(link);
+    isMobile && props.closeSidebar();
   };
-  
+
   return (
     <Drawer
-      classes={{
-        paper: classes.paper,
-      }}
       anchor="left"
       open={props.openSidebar}
-      variant="persistent"
+      variant={isMobile ? "temporary" : "persistent"}
+      onClose={props.closeSidebar}
     >
       <PerfectScrollbar>
-        <List className={styles.list}>
+        <List
+          className={styles.list}
+          style={{ marginTop: !isMobile && "64px" }}
+        >
           <ListItem
             button
             selected={selectedItem === "/"}
@@ -139,12 +140,6 @@ const Sidebar = (props) => {
     </Drawer>
   );
 };
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    top: "64px",
-  },
-}));
 
 const mapStateToProps = (state) => {
   return {
