@@ -14,46 +14,32 @@ const Home = () => {
         Bangumi
       </Typography>
       <Typography paragraph align="center">
-        本网站提供日本动画番剧导航，网站基于
-        <Link href="https://github.com/bangumi-data/bangumi-data">
-          bangumi-data
+        本网站提供日本动画番剧导航，网站基于多个API的的数据源生成。详细请看
+        <Link color="secondary" href="/about">
+          关于
         </Link>
-        和<Link href="https://github.com/bangumi/api">Bangumi API</Link>
-        的数据源生成。
+        页面。
       </Typography>
       <Typography paragraph align="center">
         <ArrowBackIosRounded className={styles.arrowIcon} />
-        请活用侧边栏来选择你要查看的资料
+        请活用侧边栏来选择你要查看的资料。网站的一些使用说明请到
+        <Link color="secondary" href="/instruction">
+          说明
+        </Link>
+        页面。
       </Typography>
       <Typography paragraph align="center">
         如果网站出现问题或者任何bug。请点击下面图标到GitHub提交问题
       </Typography>
       <div className={styles.badges}>
-        <Link href="https://github.com/developer-haku/bangumi/blob/master/LICENSE">
+        <Link
+          target="_blank"
+          rel="noreferrer"
+          href="https://github.com/developer-haku/bangumi/issues/new"
+        >
           <img
-            className={styles.badge}
-            alt="GitHub"
-            src="https://img.shields.io/github/license/developer-haku/bangumi?style=flat-square"
-          />
-        </Link>
-        <Link href="https://github.com/developer-haku/bangumi">
-          <img
-            className={styles.badge}
-            alt="GitHub package.json version (branch)"
-            src="https://img.shields.io/github/package-json/v/developer-haku/bangumi/master?label=Build&logo=github&style=flat-square"
-          />
-        </Link>
-        <Link href="https://github.com/developer-haku/bangumi/issues/new">
-          <img
-            className={styles.badge}
             alt="GitHub Issue"
             src="https://img.shields.io/badge/GitHub-%E6%8F%90%E4%BA%A4%E9%97%AE%E9%A2%98-red?style=flat-square&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiIHdpZHRoPSIxOHB4IiBoZWlnaHQ9IjE4cHgiPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMFYweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0xMSAxNWgydjJoLTJ6bTAtOGgydjZoLTJ6bS45OS01QzYuNDcgMiAyIDYuNDggMiAxMnM0LjQ3IDEwIDkuOTkgMTBDMTcuNTIgMjIgMjIgMTcuNTIgMjIgMTJTMTcuNTIgMiAxMS45OSAyek0xMiAyMGMtNC40MiAwLTgtMy41OC04LThzMy41OC04IDgtOCA4IDMuNTggOCA4LTMuNTggOC04IDh6Ii8%2BPC9zdmc%2B"
-          />
-        </Link>
-        <Link href="https://www.jsdelivr.com/package/npm/bangumi-data">
-          <img
-            alt="GitHub package.json version (branch)"
-            src="https://img.shields.io/github/package-json/v/bangumi-data/bangumi-data/master?label=bangumi-data&style=flat-square&logo=jsdelivr"
           />
         </Link>
       </div>

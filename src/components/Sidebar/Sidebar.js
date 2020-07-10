@@ -116,19 +116,34 @@ const Sidebar = (props) => {
           </ListItem>
           <ListItem
             button
-            selected={selectedItem === "/favorite"}
-            onClick={() => clickHandler("/favorite")}
+            selected={selectedItem === "/instruction"}
+            onClick={() => clickHandler("/instruction")}
           >
-            <ListItemText>我的收藏</ListItemText>
+            <ListItemText>使用说明</ListItemText>
           </ListItem>
-          <ListSubheader disableSticky>当季新番</ListSubheader>
+          <ListItem
+            button
+            selected={selectedItem === "/about"}
+            onClick={() => clickHandler("/about")}
+          >
+            <ListItemText>关于</ListItemText>
+          </ListItem>
+
+          <ListSubheader disableSticky>番剧</ListSubheader>
           <Divider />
           <ListItem
             button
             selected={selectedItem === "/weekly"}
             onClick={() => clickHandler("/weekly")}
           >
-            <ListItemText>每周新番</ListItemText>
+            <ListItemText>新番周表</ListItemText>
+          </ListItem>
+          <ListItem
+            button
+            selected={selectedItem === "/favorite"}
+            onClick={() => clickHandler("/favorite")}
+          >
+            <ListItemText>我的收藏</ListItemText>
           </ListItem>
           <ListSubheader disableSticky>历史数据</ListSubheader>
           <Divider />

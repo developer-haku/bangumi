@@ -50,6 +50,8 @@ export const translateBreadcrumb = (breadcrumb) => {
   const translateData = {
     weekly: "每周新番",
     favorite: "我的收藏",
+    about: "关于",
+    instruction: "使用说明"
   };
 
   return translateData[breadcrumb] ? translateData[breadcrumb] : breadcrumb;
@@ -126,55 +128,6 @@ export const translateWeekday = (index) => {
   ];
 };
 
-//https://awik.io/determine-color-bright-dark-using-javascript/
-/**
- * check the image is mostly light or dark
- * @param {string} color rgb css value string
- * @returns "light" or "dark"
- */
-export const lightOrDark = (color) => {
-  // Variables for red, green, blue values
-  var r, g, b, hsp;
-
-  // Check the format of the color, HEX or RGB?
-  if (color.match(/^rgb/)) {
-    // If RGB --> store the red, green, blue values in separate variables
-    color = color.match(
-      /^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/
-    );
-
-    r = color[1];
-    g = color[2];
-    b = color[3];
-  } else {
-    // If hex --> Convert it to RGB: http://gist.github.com/983661
-    color = +("0x" + color.slice(1).replace(color.length < 5 && /./g, "$&$&"));
-
-    r = color >> 16;
-    g = (color >> 8) & 255;
-    b = color & 255;
-  }
-
-  // HSP (Highly Sensitive Poo) equation from http://alienryderflex.com/hsp.html
-  hsp = Math.sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
-
-  // Using the HSP value, determine whether the color is light or dark
-  if (hsp > 127.5) {
-    return "light";
-  } else {
-    return "dark";
-  }
-};
-
-/**
- * convert rgb array to rgb css value
- * @param {Array} colorArray array of rgb color number
- * @returns rgb css value string
- */
-export const toRGB = (colorArray) => {
-  return "rgb(" + colorArray.join(", ") + ")";
-};
-
 /**
  * convert the image url to another url with a different size
  * @param {string} url bangumi image url
@@ -184,3 +137,13 @@ export const toRGB = (colorArray) => {
 export const swapCoverPictureSize = (url, size) => {
   return url.replace(/(?<=cover)(\/)(.)(\/)/g, `/${size}/`)
 }
+
+
+/**
+ * convert a url to one begin with https protocal
+ * @param {string} url url of any kind
+ * @returns url string begin with https protocal
+ */
+export const forceHttps = (url) => {
+  return url.match(/\/\//g) ? url.replace(/.+(?<=\/\/)/g, "https://") : `https://${url}`
+} 
