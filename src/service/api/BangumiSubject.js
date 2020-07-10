@@ -1,12 +1,16 @@
 import axios from "axios";
 
-import { swapCoverPictureSize } from "../../utils/utils";
+import { swapCoverPictureSize, forceHttps } from "../../utils/utils";
 
 const fetchBangumiSubjectData = async (id) => {
   const response = await axios
-    .get(`https://cdn.jsdelivr.net/gh/czy0729/Bangumi-Subject@master/data/${parseInt(id / 100)}/${id}.json`)
+    .get(
+      `https://cdn.jsdelivr.net/gh/czy0729/Bangumi-Subject@master/data/${parseInt(
+        id / 100
+      )}/${id}.json`
+    )
     .catch((err) => console.log(`FAILED TO FETCH ID ${id} `));
-  
+
   return response ? response.data : null;
 };
 
@@ -14,7 +18,11 @@ const reassembleBasicData = (data) => {
   let reassembledData = {};
   reassembledData.name = data ? data.name : null;
   reassembledData.nameCn = null;
-  reassembledData.image = data ? data.image ? swapCoverPictureSize(data.image, "l") : "" : "";
+  reassembledData.image = data
+    ? data.image
+      ? forceHttps(swapCoverPictureSize(data.image, "l"))
+      : ""
+    : "";
   reassembledData.score = data ? (data.rating ? data.rating.score : 0) : 0;
   return reassembledData;
 };

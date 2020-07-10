@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Dialog,
@@ -6,17 +6,30 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
+  Switch,
+  Divider,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 const Reset = (props) => {
+  const [ignoreFav, setIgnoreFav] = useState(false);
   const history = useHistory();
 
   const reset = () => {
-    localStorage.clear();
+    if (ignoreFav) {
+      const savedFav = localStorage.getItem("favorite");
+      localStorage.clear();
+      localStorage.setItem("favorite", savedFav);
+    } else {
+      localStorage.clear();
+    }
     props.close();
     history.push("/");
     window.location.reload();
+  };
+
+  const ignoreFavHandler = () => {
+    setIgnoreFav((prevState) => !prevState);
   };
 
   return (
@@ -31,6 +44,15 @@ const Reset = (props) => {
       <DialogContent>
         <DialogContentText>
           清除的数据都是储存在浏览器的localStorage里面的数据，包括本地bangumi-data数据与收藏的番剧数据，以及设置数据。你确定要清除么？
+        </DialogContentText>
+        <Divider />
+        <DialogContentText>
+          保留收藏
+          <Switch
+            checked={ignoreFav}
+            onChange={ignoreFavHandler}
+            size="small"
+          />
         </DialogContentText>
       </DialogContent>
       <DialogActions>

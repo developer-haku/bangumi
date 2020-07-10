@@ -68,3 +68,19 @@
   font-size: 1.5vw;
   font-weight: bolder;
 }
+
+@media only screen and (max-width: 800px) {
+  .bottomButton {
+    transform: translateY(-100%);
+    transition: transform 300ms ease-in-out;
+  }
+
+  .seasonIcon {
+    width: 50%;
+  }
+
+  .buttonTextSeason {
+    font-size: 3vw;
+    font-weight: bolder;
+  }
+}
