@@ -10,6 +10,8 @@ export default class AnimeDataService {
   getBangumiDataBasic = (id) => {
     switch (this.cardApi) {
       case "default":
+        return API.getBangumiGaDataBasic(id);
+      case "bangumiSubject":
         return API.getBangumiSubjectDataBasic(id);
       case "bangumiCORS":
         return API.getBangumiApiDataBasic(id, this.corsUrl);
@@ -23,6 +25,8 @@ export default class AnimeDataService {
   getBangumiDataFull = (id) => {
     switch (this.pageApi) {
       case "default":
+        return API.subjectGaMix(id);
+      case "bangumiApi":
         return API.subjectApiMix(id, this.corsUrl);
       case "netabare":
         return API.subjectNetabareMix(id);

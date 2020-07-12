@@ -34,8 +34,16 @@ const About = () => {
         </Link>
         <Link href="https://www.jsdelivr.com/package/npm/bangumi-data">
           <img
+            className={styles.badge}
             alt="GitHub package.json version (branch)"
             src="https://img.shields.io/github/package-json/v/bangumi-data/bangumi-data/master?label=bangumi-data&style=flat-square&logo=jsdelivr"
+          />
+        </Link>
+        <Link href="https://github.com/developer-haku/bangumi-ga">
+          <img
+            className={styles.badge}
+            alt="GitHub release (latest by date)"
+            src="https://img.shields.io/github/v/release/developer-haku/bangumi-ga?color=orange&label=bangumi-ga&logo=GitHub&style=flat-square"
           />
         </Link>
       </div>
@@ -69,6 +77,15 @@ const About = () => {
       </Typography>
       <Divider />
       <ul className={styles.apiList}>
+        <li>
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href="https://github.com/developer-haku/bangumi-ga"
+          >
+            bangumi-ga
+          </Link>
+        </li>
         <li>
           <Link
             target="_blank"
