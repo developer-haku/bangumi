@@ -1,4 +1,5 @@
 export { getBangumiSubjectDataBasic, getBangumiSubjectDataFull } from "./BangumiSubject";
 export { getBangumiApiDataBasic, getBangumiApiDataFull } from "./BangumiApi";
 export { getNetabareDataBasic, getNetabareDataFull} from "./Netabare"
-export { subjectApiMix, subjectNetabareMix } from "./DataMix";
+export { getBangumiGaDataBasic, getBangumiGaDataFull } from "./BangumiGA";
+export { subjectApiMix, subjectNetabareMix, subjectGaMix } from "./DataMix";

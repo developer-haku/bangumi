@@ -89,7 +89,12 @@ const Setting = (props) => {
             <FormControlLabel
               control={<Radio color="primary" />}
               value="default"
-              label="Bangumi-Subject(默认)"
+              label="Bangumi-GA(默认)"
+            />
+            <FormControlLabel
+              control={<Radio color="primary" />}
+              value="bangumiSubject"
+              label="Bangumi-Subject"
             />
             <FormControlLabel
               control={<Radio color="primary" />}
@@ -108,6 +113,11 @@ const Setting = (props) => {
             <FormControlLabel
               control={<Radio color="primary" />}
               value="default"
+              label="Bangumi-Subject + Bangumi-GA(默认)"
+            />
+            <FormControlLabel
+              control={<Radio color="primary" />}
+              value="bangumiApi"
               label="Bangumi-Subject + Bangumi API(CORS)"
             />
             <FormControlLabel
