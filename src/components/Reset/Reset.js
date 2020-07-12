@@ -12,7 +12,7 @@ import {
 import { useHistory } from "react-router-dom";
 
 const Reset = (props) => {
-  const [ignoreFav, setIgnoreFav] = useState(false);
+  const [ignoreFav, setIgnoreFav] = useState(true);
   const history = useHistory();
 
   const reset = () => {
