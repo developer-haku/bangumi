@@ -16,14 +16,6 @@ This app is highly base on [bangumi-data](https://github.com/bangumi-data/bangum
 
 > :warning: This app is fully in Chinese, because the data sources that I am using are in Chinese. English version may or may not implemented in the future.
 
-# Planning Features
-
-- View anime list from any seasons in the past, or currently on air.
-- View information of an anime, including characters, casts, rating and more.
-- Favoring anime to have fast access of its information.
-- Links to the anime's airing sites, official site, and bangumi.tv information site.
-- More are planning
-
 # Development
 
 If you found this project interesting and want to develop it to your own version. Simply do the following.
