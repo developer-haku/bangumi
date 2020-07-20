@@ -14,14 +14,6 @@
 
 因为这个app大部分是基于[bangumi-data](https://github.com/bangumi-data/bangumi-data)和[bangumi-api](https://github.com/bangumi/api)的。 虽然我想一直做下去做到我写完我所有想要的功能和修完全部的bug，但是如果bangumi-data凉了，这个app也基本凉了，除非我能找到替代的数据源。
 
-# 计划中的功能
-
-- 查看以往或者现在播出中的日本动画季番
-- 查看某部番剧的信息，包括角色，声优，评分等等。
-- 收藏喜欢的番剧。
-- 外链番剧的官网，正在播出的站点，bangumi.tv的信息页等等。
-- 更多在计划之中。
-
 # 开发
 
 如果你喜欢这个项目，想自己捣鼓添加一些功能。你需要做以下的。
