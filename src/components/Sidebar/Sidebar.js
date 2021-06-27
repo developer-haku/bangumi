@@ -116,13 +116,6 @@ const Sidebar = (props) => {
           </ListItem>
           <ListItem
             button
-            selected={selectedItem === "/instruction"}
-            onClick={() => clickHandler("/instruction")}
-          >
-            <ListItemText>使用说明</ListItemText>
-          </ListItem>
-          <ListItem
-            button
             selected={selectedItem === "/about"}
             onClick={() => clickHandler("/about")}
           >

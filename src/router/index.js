@@ -6,7 +6,6 @@ import SeasonAnimeList from "../components/AnimeList/SeasonAnimeList/SeasonAnime
 import AnnualAnimeList from "../components/AnimeList/AnnualAnimeList/AnnualAnimeList";
 import Home from "../pages/Home/Home";
 import About from "../pages/About/About";
-import Instruction from "../pages/Instruction/Instruction";
 import FavoritedAnimeList from "../components/AnimeList/FavoritedAnimeList/FavoritedAnimeList";
 import ErrorPage from "../pages/Error/Error";
 import FullAnimeInfo from "../components/FullAnimeInfo/FullAnimeInfo";
@@ -17,7 +16,6 @@ const Router = (props) => {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/about" exact component={About} />
-        <Route path="/instruction" exact component={Instruction} />
         <Route path="/favorite" exact component={FavoritedAnimeList} />
         <Route path="/weekly" exact component={WeeklyAnimeList} />
         <Route path="/error" exact component={ErrorPage} />
