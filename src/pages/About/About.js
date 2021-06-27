@@ -49,6 +49,8 @@ const About = () => {
       </div>
       <Divider />
       <Typography className={styles.paragraph} variant="body1">
+        --  本网站，以及本网站源代码已经停止更新 --
+        <br />
         这网站是基于bangumi-data作为主要API生成列表，bangumi.tv
         api数据补全信息，使用React.js开发的日本动画番剧导航网站。
         <br />
@@ -64,28 +66,13 @@ const About = () => {
         </Link>
         的组件。
         <br />
-        如果你有啥问题或者建议，可以到Github的repo给我提交issue。如果你是强强dalao，想优化一下我的辣鸡代码，也可以直接发Pull
-        Request。
-        <br />
-        这网站开发到我想要的功能都差不多齐全的时候基本上就会减缓开发速度，之后会偶尔优化一下或者修修bug。
-        <br />
-        主要基本上所有页面都是基于API动态生成，不用经常手动更新也是我的主要开发目的。不过要是API都挂掉的话，这网站也会挂掉的。
       </Typography>
       <Divider />
       <Typography className={styles.header2} variant="h5">
-        使用的API
+        感谢
       </Typography>
       <Divider />
       <ul className={styles.apiList}>
-        <li>
-          <Link
-            target="_blank"
-            rel="noreferrer"
-            href="https://github.com/developer-haku/bangumi-ga"
-          >
-            bangumi-ga
-          </Link>
-        </li>
         <li>
           <Link
             target="_blank"
@@ -104,32 +91,8 @@ const About = () => {
             bangumi.tv api
           </Link>
         </li>
-        <li>
-          <Link target="_blank" rel="noreferrer" href="https://netaba.re/">
-            netaba.re
-          </Link>
-        </li>
       </ul>
-      <Typography className={styles.paragraph} variant="body1">
-        <Typography className={styles.notice} variant="caption">
-          netaba.re是我爬出来的API接口。如果给原站主您的服务器造成了压力，请发信息到
-          <Link href="mailto:developer.haku@gmail.com">
-            developer.haku@gmail.com
-          </Link>
-          。我会删掉这个API的。
-          <span role="img" aria-label="希望API没事" aria-hidden={false}>
-            🙏
-          </span>
-        </Typography>
-      </Typography>
       <Divider />
-      <Typography className={styles.header2} variant="h5">
-        感谢
-      </Typography>
-      <Divider />
-      <Typography className={styles.paragraph} variant="body1">
-        感谢所有API接口的创造者和维护者。还有CORS-Anywhere的跨域服务。
-      </Typography>
     </div>
   );
 };
