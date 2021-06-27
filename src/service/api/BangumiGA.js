@@ -5,7 +5,7 @@ import { forceHttps } from "../../utils/utils";
 const fetchBangumiGaData = async (id) => {
   const response = await axios
     .get(
-      `https://cdn.jsdelivr.net/gh/developer-haku/bangumi-ga@latest/data/${
+      `https://cdn.jsdelivr.net/gh/developer-haku/bangumi-ga@master/data/${
         parseInt(id / 100)
       }/${id}.json`
     )
