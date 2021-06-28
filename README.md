@@ -10,7 +10,7 @@
 
 本项目已停止更新。
 
-This project is not long active.
+This project is not longer active.
 
 # 感谢 / Credits
 
